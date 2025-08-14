@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmação - BioTech</title>
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <link rel="stylesheet" href="estilo/carrinho.css" />
+    <script src="javascriptt/javascript.js" defer></script>
+    <script src="javascriptt/login.js" defer></script>
+    <script src="javascriptt/geradordecep.js" defer></script>
+    
+     
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon" />
+    <style>
+      .etapas-checkout {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 10px;
+      }
+
+      .etapas-checkout .etapa {
+        flex: 1;
+        text-align: center;
+        color: #ccc;
+        font-weight: 600;
+        position: relative;
+      }
+
+      .etapas-checkout .etapa i {
+        display: block;
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+
+      .etapas-checkout .etapa.ativa {
+        color: #28a745;
+      }
+
+      .etapas-checkout .etapa::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 100%;
+        height: 4px;
+        background-color: #ccc;
+        z-index: -1;
+        transform: translateY(-50%);
+      }
+
+      .etapas-checkout .etapa:last-child::after {
+        display: none;
+      }
+
+      .etapas-checkout .etapa.ativa::after {
+        background-color: #28a745;
+      }
+
+      .confirmacao-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+      }
+
+      .confirmacao-content {
+        background-color: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        animation-duration: 0.6s;
+      }
+
+      .confirmacao-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .sucesso-icon {
+        color: #28a745;
+        font-size: 5rem;
+        margin-bottom: 20px;
+      }
+
+      .confirmacao-header h1 {
+        color: #28a745;
+        margin-bottom: 15px;
+      }
+
+      .confirmacao-header p {
+        color: #555;
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+
+      .info-box {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .info-box h2 {
+        color: #1a4f2b;
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        font-size: 1.3rem;
+      }
+
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .info-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .info-label {
+        font-weight: bold;
+        color: #555;
+      }
+
+      .info-value {
+        color: #333;
+        font-weight: 500;
+      }
+
+      .produto-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 8px 0;
+      }
+
+      .acoes {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+
+      .btn-primario,
+      .btn-secundario {
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .btn-primario {
+        background-color: #1a4f2b;
+        color: white;
+        border: none;
+      }
+
+      .btn-primario:hover {
+        background-color: #123822;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-secundario {
+        background-color: white;
+        color: #1a4f2b;
+        border: 1px solid #1a4f2b;
+      }
+
+      .btn-secundario:hover {
+        background-color: #f0f0f0;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primario:active,
+      .btn-secundario:active {
+        transform: translateY(0);
+      }
+
+      .beneficio {
+        background-color: #f0f8f0;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 30px;
+        border-left: 4px solid #28a745;
+      }
+
+      .beneficio h3 {
+        color: #1a4f2b;
+        margin-top: 0;
+      }
+
+      .selos-confianca {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+
+      .selo-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .selo-item img {
+        width: 60px;
+        height: auto;
+      }
+
+      .selo-item span {
+        font-size: 0.8rem;
+        color: #555;
+        text-align: center;
+      }
+
+      .recomendacoes {
+        margin-top: 40px;
+      }
+
+      .recomendacoes h3 {
+        color: #1a4f2b;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .produtos-recomendados {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 10px 0;
+        justify-content: center;
+      }
+
+      .produto-recomendado {
+        min-width: 150px;
+        text-align: center;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .produto-recomendado:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .produto-recomendado img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .produto-recomendado h4 {
+        margin: 8px 0 4px;
+        font-size: 0.9rem;
+      }
+
+      .produto-recomendado .preco {
+        color: #1a4f2b;
+        font-weight: bold;
+      }
+
+      .btn-copiar {
+        background: none;
+        border: none;
+        color: #1a4f2b;
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      .toast-notification {
+        background: #28a745;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .toast-notification.show {
+        opacity: 1;
+        bottom: 40px;
+      }
+
+      .toast-notification.error {
+        background: #dc3545;
+      }
+
+      .toast-notification.warning {
+        background: #ffc107;
+        color: #212529;
+      }
+
+      #produtos-recomendados {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .card-produto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 160px;
+        padding: 16px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        text-decoration: none;
+        color: #222;
+        transition: box-shadow 0.2s, transform 0.2s;
+      }
+      .card-produto:hover {
+        box-shadow: 0 4px 16px rgba(0, 150, 136, 0.18);
+        transform: translateY(-4px) scale(1.03);
+      }
+      .card-produto img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+      .card-produto .nome {
+        font-weight: bold;
+        margin-bottom: 4px;
+        text-align: center;
+      }
+      .card-produto .preco {
+        color: #009688;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .confirmacao-content {
+          padding: 20px;
+        }
+
+        .acoes {
+          flex-direction: column;
+        }
+
+        .btn-primario,
+        .btn-secundario {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .info-item {
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .confirmacao-header h1 {
+          font-size: 1.5rem;
+        }
+
+        .confirmacao-header p {
+          font-size: 0.9rem;
+        }
+
+        .info-box {
+          padding: 15px;
+        }
+
+        .selos-confianca {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      body.dark-mode .confirmacao-content,
+      body.dark-mode .info-box {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      body.dark-mode .info-label,
+      body.dark-mode .info-box h2 {
+        color: #4caf50;
+      }
+
+      body.dark-mode .info-value,
+      body.dark-mode .confirmacao-header p {
+        color: #e0e0e0;
+      }
+
+      body.dark-mode .beneficio {
+        background-color: #1a2e1a;
+      }
+
+      body.dark-mode .btn-secundario {
+        background-color: #333;
+        color: #4caf50;
+        border-color: #4caf50;
+      }
+
+      body.dark-mode .btn-secundario:hover {
+        background-color: #444;
+      }
+
+      body.dark-mode .produto-recomendado {
+        background-color: #333;
+      }
+
+      body.dark-mode .selo-item span {
+        color: #aaa;
+      }
+
+      body.dark-mode .btn-copiar {
+        color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="toast-notification" class="toast-notification"></div>
+    <header>
+      <div class="logo-nome">
+        <a href="index.html">
+          <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+        </a>
+        <h1>BioTech</h1>
+      </div>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="sobre.html">Sobre Nós</a></li>
+          <li><a href="metas.html">Metas</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li>
+            <label for="auth-modal-toggle" class="auth-btn"
+              >Login ou Cadastro</label
+            >
+          </li>
+        </ul>
+        <a href="carrinho.html" class="carrinho-icon">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+            alt="Carrinho"
+            width="30"
+          />
+        </a>
+        <div
+          id="carrinho"
+          class="carrinho-modal"
+          onclick="this.style.display='none'"
+        >
+          <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+            <div
+              class="carrinho-close"
+              onclick="document.getElementById('carrinho').style.display='none'"
+            >
+              &times;
+            </div>
+            <h2>Seu Carrinho</h2>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <input type="checkbox" id="auth-modal-toggle" class="modal-toggle" />
+    <div class="auth-modal">
+      <label for="auth-modal-toggle" class="modal-overlay"></label>
+      <div class="auth-modal-content">
+        <label for="auth-modal-toggle" class="close-modal">&times;</label>
+        <div class="auth-tabs">
+          <input type="radio" id="login-tab" name="auth-tab" checked />
+          <input type="radio" id="register-tab" name="auth-tab" />
+          <div class="tab-labels">
+            <label for="login-tab" class="tab-btn">Login</label>
+            <label for="register-tab" class="tab-btn">Registrar</label>
+          </div>
+          <div class="tab-contents">
+            <div class="tab-content" id="login-content">
+              <form class="auth-form" action-login>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Senha" required />
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    margin: 8px 0 0 0;
+                  "
+                >
+                  <input type="checkbox" id="lembrar-senha" />
+                  Lembrar senha
+                </label>
+                <button type="submit" class="auth-submit-btn">Login</button>
+                <a href="esqueceu-a-senha.html" class="forgot-password"
+                  >Esqueceu a Senha?</a
+                >
+              </form>
+              <div class="social-login">
+                <a
+                  href="https://accounts.google.com/"
+                  class="social-btn google"
+                >
+                  <img
+                    src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg"
+                    alt="Google"
+                    class="google-icon"
+                  />
+                  Entrar com Google
+                </a>
+              </div>
+            </div>
+            <div class="tab-content" id="register-content">
+              <form class="auth-form" action-register>
+                <input
+                  type="text"
+                  placeholder="Nome inteiro"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <input type="date" required />
+                <input
+                  type="text"
+                  placeholder="Nome Materno"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <div class="gender-selection">
+                  <p class="gender-label">Sexo:</p>
+                  <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male" class="gender-option">Homem</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female" class="gender-option">Mulher</label>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other" class="gender-option">Outro</label>
+                    <input
+                      type="radio"
+                      id="prefer-not-to-say"
+                      name="gender"
+                      value="prefer-not-to-say"
+                    />
+                    <label for="prefer-not-to-say" class="gender-option"
+                      >Prefiro não dizer</label
+                    >
+                  </div>
+                </div>
+                <input type="email" placeholder="Email" required />
+                <input
+                  type="tel"
+                  placeholder="Telefone/Fixo"
+                  required
+                  minlength="15"
+                  maxlength="15"
+                  pattern="\(\d{2}\) \d{5}-\d{4}"
+                />
+                <input
+                  type="text"
+                  placeholder="CEP"
+                  id="cep"
+                  required
+                  maxlength="9"
+                />
+                <input type="text" placeholder="Rua" id="rua" required />
+                <input type="text" placeholder="Número" id="numero" required />
+                <input type="text" placeholder="Bairro" id="bairro" required />
+                <input type="text" placeholder="Cidade" id="cidade" required />
+                <input type="text" placeholder="Estado" id="estado" required />
+                <input
+                  type="text"
+                  placeholder="CPF"
+                  required
+                  minlength="14"
+                  maxlength="14"
+                  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  minlength="8"
+                  maxlength="15"
+                  required
+                />
+                <input type="password" placeholder="Confirmar Senha" required />
+                <button type="submit" class="auth-submit-btn">Registrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aviso-topo">
+      FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA
+      COMPRA
+    </div>
+
+    <div class="accessibility-float">
+      <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-solid fa-eye"></i>
+      </button>
+      <div class="accessibility-options">
+        <button id="toggle-theme" title="Alternar contraste">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="font-controls">
+          <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+          <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+          <button class="accessibility-btn" onclick="resetFont()">A</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="botao-voltar" onclick="history.back()">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+
+    <div class="etapas-checkout">
+      <div class="etapa ativa">
+        <i class="fa fa-shopping-cart"></i>
+        <span>Carrinho</span>
+      </div>
+      <div class="etapa ativa">
+        <i class="fa fa-user"></i>
+        <span>Identificação</span>
+      </div>
+      <div class="etapa ativa">
+        <i class="fa fa-credit-card"></i>
+        <span>Pagamento</span>
+      </div>
+      <div class="etapa ativa">
+        <i class="fa fa-check-circle"></i>
+        <span>Confirmação</span>
+      </div>
+    </div>
+
+    <main class="confirmacao-container">
+      <div class="confirmacao-content">
+        <div class="confirmacao-header">
+          <div class="sucesso-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h1>Compra realizada com sucesso!</h1>
+          <p>
+            Seu pedido foi confirmado e está sendo processado. Enviamos os
+            detalhes para o seu e-mail.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h2>Resumo do Pedido</h2>
+          <div class="info-item">
+            <span class="info-label">Número do Pedido:</span>
+            <span class="info-value" id="numero-pedido"></span>
+            <button class="btn-copiar" title="Copiar número do pedido">
+              <i class="far fa-copy"></i> Copiar
+            </button>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Data:</span>
+            <span class="info-value" id="data-pedido"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Forma de Pagamento:</span>
+            <span class="info-value" id="metodo-pagamento"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Frete:</span>
+            <span class="info-value" id="valor-frete"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Valor Total:</span>
+            <span class="info-value" id="valor-total"></span>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h2>Produtos</h2>
+          <div id="produtos-lista"></div>
+        </div>
+
+        <div class="info-box">
+          <h2>Informações de Entrega</h2>
+          <div id="endereco-entrega"></div>
+          <div class="info-item">
+            <span class="info-label">Prazo estimado de entrega:</span>
+            <span class="info-value" id="data-entrega"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Código de rastreamento:</span>
+            <span class="info-value">Disponível em até 24h</span>
+          </div>
+        </div>
+
+        <div class="selos-confianca">
+          <div class="selo-item">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2276/2276931.png"
+              alt="Impressão 3D Ecológica"
+            />
+            <span>Impressão 3D com Bioplásticos</span>
+          </div>
+          <div class="selo-item">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/159/159469.png"
+              alt="Materiais Biodegradáveis"
+            />
+            <span>100% Biodegradável</span>
+          </div>
+          <div class="selo-item">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3090/3090407.png"
+              alt="Energia Renovável"
+            />
+            <span>Energia Renovável na Produção</span>
+          </div>
+        </div>
+
+        <div class="acoes">
+          <button class="btn-primario" onclick="window.print()">
+            <i class="fas fa-print"></i> Imprimir Comprovante
+          </button>
+          <button class="btn-primario" id="btn-acompanhar">
+            <i class="fas fa-truck"></i> Acompanhar Pedido
+          </button>
+          <a href="index.html" class="btn-secundario">
+            <i class="fas fa-home"></i> Voltar à Página Inicial
+          </a>
+        </div>
+
+        <div class="beneficio">
+          <h3>🌱 Obrigado por contribuir com um planeta mais verde!</h3>
+          <p>
+            Sua compra na BioTech ajuda a reduzir o uso de plásticos
+            descartáveis. Como agradecimento, incluímos uma semente especial na
+            sua entrega.
+          </p>
+        </div>
+
+        <div class="recomendacoes">
+          <h3>Você também pode gostar</h3>
+          <div class="produtos-recomendados" id="produtos-recomendados"></div>
+        </div>
+      </div>
+    </main>
+
+    <button
+      class="botao-orcamento"
+      onclick="document.getElementById('modal-orcamento').style.display='flex'"
+    >
+      💬 Orçamento para Eventos Aqui!
+    </button>
+
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"
+          />
+
+          <label>Email:</label>
+          <input type="email" required />
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required
+          />
+          <label>CEP:</label>
+          <input type="text" id="orcamento-cep" placeholder="" required />
+          <label>Rua:</label>
+          <input type="text" id="orcamento-rua" placeholder="" required />
+          <label>Bairro:</label>
+
+          <input type="text" id="orcamento-bairro" placeholder="" required />
+          <label>Cidade:</label>
+          <input type="text" id="orcamento-cidade" placeholder="" required />
+          <label>Estado:</label>
+          <input type="text" id="orcamento-estado" placeholder="" required />
+          <label>Descrição:</label>
+          <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <footer id="contato">
+      <p>Contato: contato@bio3d.com.br | (11) 1234-5678</p>
+      <p>&copy; 2025 Bio3D. Todos os direitos reservados.</p>
+      <div class="redes-sociais">
+        <a
+          href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr"
+          target="_blank"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+            alt="Instagram"
+          />
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .querySelector(".confirmacao-content")
+          .classList.add("animate__animated", "animate__fadeInUp");
+
+        const now = new Date();
+        const pedidoId = `BT${now.getFullYear()}${String(
+          now.getMonth() + 1
+        ).padStart(2, "0")}${String(now.getDate()).padStart(
+          2,
+          "0"
+        )}-${Math.floor(1000 + Math.random() * 9000)}`;
+        document.getElementById("numero-pedido").textContent = pedidoId;
+
+        const options = {
+          weekday: "long",
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        };
+        document.getElementById("data-pedido").textContent =
+          new Date().toLocaleDateString("pt-BR", options);
+
+        const metodoPagamento =
+          localStorage.getItem("metodoPagamento") || "Cartão de Crédito";
+        document.getElementById("metodo-pagamento").textContent =
+          metodoPagamento;
+
+        const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+
+        let subtotal = 0;
+        let quantidadeTotal = 0;
+
+        carrinho.forEach(item => {
+          const quantidade = Number(item.qtd) || 1;
+          const preco = Number(item.preco) || 0;
+          subtotal += preco * quantidade;
+          quantidadeTotal += quantidade;
+        });
+
+        // Frete
+        let frete = Number(localStorage.getItem("freteCalculado")) || 29.9;
+        const cupomAplicado = localStorage.getItem("cupomAplicado");
+
+        if (subtotal >= 500 && cupomAplicado === "FG500") {
+          frete = 0;
+        }
+
+        // Total
+        const total = subtotal + frete;
+
+        // Exibir valores
+        if (document.getElementById("valor-frete"))
+          document.getElementById("valor-frete").textContent = frete === 0 ? "Grátis" : "R$ " + frete.toFixed(2).replace(".", ",");
+        if (document.getElementById("valor-total"))
+          document.getElementById("valor-total").textContent = "R$ " + total.toFixed(2).replace(".", ",");
+
+        if (document.getElementById("subtotal-confirmacao"))
+          document.getElementById("subtotal-confirmacao").textContent = "R$ " + subtotal.toFixed(2).replace(".", ",");
+        if (document.getElementById("quantidade-confirmacao"))
+          document.getElementById("quantidade-confirmacao").textContent = quantidadeTotal + " itens";
+        if (document.getElementById("frete-confirmacao"))
+          document.getElementById("frete-confirmacao").textContent = frete === 0 ? "Grátis" : "R$ " + frete.toFixed(2).replace(".", ",");
+        if (document.getElementById("total-confirmacao"))
+          document.getElementById("total-confirmacao").textContent = "R$ " + total.toFixed(2).replace(".", ",");
+        
+
+        // Listar produtos
+        const produtosLista = document.getElementById("produtos-lista");
+        produtosLista.innerHTML = "";
+        carrinho.forEach(item => {
+          const quantidade = Number(item.qtd) || 1;
+          const preco = Number(item.preco) || 0;
+          const produtoDiv = document.createElement("div");
+          produtoDiv.className = "produto-item";
+          produtoDiv.innerHTML = `
+            <span>${item.nome || "Produto"} - ${quantidade}x</span>
+            <span>R$ ${(preco * quantidade).toFixed(2).replace(".", ",")}</span>
+          `;
+          produtosLista.appendChild(produtoDiv);
+        });
+
+        const enderecoEntrega = document.getElementById("endereco-entrega");
+        const endereco = JSON.parse(localStorage.getItem("userEndereco")) || {};
+
+        enderecoEntrega.innerHTML = `
+        <div class="info-item">
+          <span class="info-label">Endereço:</span>
+          <span class="info-value">${endereco.rua || ""}, ${
+          endereco.numero || ""
+        }</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Complemento:</span>
+          <span class="info-value">${endereco.complemento || "-"}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Bairro:</span>
+          <span class="info-value">${endereco.bairro || ""}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Cidade/Estado:</span>
+          <span class="info-value">${endereco.cidade || ""} - ${
+          endereco.estado || ""
+        }</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">CEP:</span>
+          <span class="info-value">${endereco.cep || ""}</span>
+        </div>
+      `;
+
+        function calcularDataEntrega() {
+          const hoje = new Date();
+          const diasUteisParaAdicionar = 7;
+          let diasAdicionados = 0;
+
+          while (diasAdicionados < diasUteisParaAdicionar) {
+            hoje.setDate(hoje.getDate() + 1);
+            if (hoje.getDay() !== 0 && hoje.getDay() !== 6) {
+              diasAdicionados++;
+            }
+          }
+
+          return hoje.toLocaleDateString("pt-BR", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          });
+        }
+
+        document.getElementById("data-entrega").textContent =
+          calcularDataEntrega();
+
+        document
+          .querySelector(".btn-copiar")
+          .addEventListener("click", function () {
+            const numeroPedido =
+              document.getElementById("numero-pedido").textContent;
+            navigator.clipboard
+              .writeText(numeroPedido)
+              .then(() => showToast("Número do pedido copiado!", "success"))
+              .catch(() =>
+                showToast("Falha ao copiar. Tente novamente.", "error")
+              );
+
+            this.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+            setTimeout(() => {
+              this.innerHTML = '<i class="far fa-copy"></i> Copiar';
+            }, 2000);
+          });
+
+        document
+          .getElementById("btn-acompanhar")
+          .addEventListener("click", function () {
+            showToast(
+              "O rastreamento estará disponível em até 24 horas",
+              "success"
+            );
+          });
+
+        const produtosRecomendados = [
+          {
+            nome: "Bolsa de Papelão",
+            preco: 39.9,
+            imagem: "imagem/bolsa de papelao.jpg",
+            href: "bolsas.html",
+          },
+          {
+            nome: "Copo de Café Reutilizável",
+            preco: 29.9,
+            imagem: "imagem/copo de cafe.jpg",
+            href: "copos.html",
+          },
+          {
+            nome: "Ecobag Sustentável",
+            preco: 49.9,
+            imagem: "imagem/ecobag.jpg",
+            href: "bolsas.html",
+          },
+          {
+            nome: "Garfos Biodegradáveis",
+            preco: 19.9,
+            imagem: "imagem/garfos.jpg",
+            href: "embalagens.html",
+          },
+          {
+            nome: "Porta Lápis Ecológico",
+            preco: 24.9,
+            imagem: "imagem/porta lapis.png",
+            href: "acessorios.html",
+          },
+        ];
+
+        document.getElementById("produtos-recomendados").innerHTML = "";
+        produtosRecomendados.forEach((produto) => {
+          const card = document.createElement("a");
+          card.href = produto.href;
+          card.className = "card-produto";
+          card.innerHTML = `
+          <img src="${produto.imagem}" alt="${produto.nome}">
+          <div class="nome">${produto.nome}</div>
+          <div class="preco">R$ ${produto.preco
+            .toFixed(2)
+            .replace(".", ",")}</div>
+        `;
+          document.getElementById("produtos-recomendados").appendChild(card);
+        });
+
+        document.querySelectorAll(".produto-recomendado").forEach((item) => {
+          item.addEventListener("mouseenter", () => {
+            item.classList.add("animate__animated", "animate__pulse");
+          });
+          item.addEventListener("mouseleave", () => {
+            item.classList.remove("animate__animated", "animate__pulse");
+          });
+        });
+
+        function showToast(message, type = "success") {
+          const toast = document.getElementById("toast-notification");
+          toast.textContent = message;
+          toast.className = "toast-notification show " + type;
+
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 3000);
+        }
+
+        if (window.location.search.includes("success=true")) {
+          localStorage.removeItem("carrinho");
+          localStorage.removeItem("checkoutProgress");
+        }
+      });
+    </script>
+  </body>
+</html>

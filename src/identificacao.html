@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identificação - BioTech</title>
+  <link rel="stylesheet" href="estilo/estilo.css" />
+  <script src="javascriptt/javascript.js" defer></script>
+  <script src="javascriptt/carrinho.js" defer></script>
+  <script src="javascriptt/geradordecep.js" defer></script>
+  <script src="javascriptt/login.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon">  
+</head>
+<body>
+   <div id="toast-notification" class="toast-notification"></div>
+  <header>
+    <div class="logo-nome">
+      <a href="index.html">
+        <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+      </a>
+      <h1>BioTech</h1>
+    </div>
+    <nav>      
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="metas.html">Metas</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><label for="auth-modal-toggle" class="auth-btn">Login ou Cadastro</label></li>
+      </ul>
+       <a href="carrinho.html" class="carrinho-icon">     
+        <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Carrinho" width="30">
+        <span id="contador-carrinho" ></span>
+        </a>
+      </div>
+      <div id="carrinho" class="carrinho-modal" onclick="this.style.display='none'">
+        <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+          <div class="carrinho-close" onclick="document.getElementById('carrinho').style.display='none'">&times;</div>
+          <h2>Seu Carrinho</h2>
+        </div>
+      </div>
+    </nav>
+  </header>
+    <input type="checkbox" id="auth-modal-toggle" class="modal-toggle" />
+    <div class="auth-modal">
+      <label for="auth-modal-toggle" class="modal-overlay"></label>
+      <div class="auth-modal-content">
+        <label for="auth-modal-toggle" class="close-modal">&times;</label>
+        <div class="auth-tabs">
+          <input type="radio" id="login-tab" name="auth-tab" checked />
+          <input type="radio" id="register-tab" name="auth-tab" />
+          <div class="tab-labels">
+            <label for="login-tab" class="tab-btn">Login</label>
+            <label for="register-tab" class="tab-btn">Registrar</label>
+          </div>
+          <div class="tab-contents">
+            <div class="tab-content" id="login-content">
+              <form class="auth-form" action-login>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Senha" required />
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    margin: 8px 0 0 0;
+                  "
+                >
+                  <input type="checkbox" id="lembrar-senha" />
+                  Lembrar senha
+                </label>
+                <button type="submit" class="auth-submit-btn">Login</button>
+                <a href="esqueceu-a-senha.html" class="forgot-password"
+                  >Esqueceu a Senha?</a
+                >
+              </form>
+              <div class="social-login">
+                <a
+                  href="https://accounts.google.com/"
+                  class="social-btn google"
+                >
+                  <img
+                    src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg"
+                    alt="Google"
+                    class="google-icon"
+                  />
+                  Entrar com Google
+                </a>
+              </div>
+            </div>
+            <div class="tab-content" id="register-content">
+              <form class="auth-form" action-register>
+                <input
+                  type="text"
+                  placeholder="Nome inteiro"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <input type="date" required />
+                <input
+                  type="text"
+                  placeholder="Nome Materno"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <div class="gender-selection">
+                  <p class="gender-label">Sexo:</p>
+                  <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male" class="gender-option">Homem</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female" class="gender-option">Mulher</label>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other" class="gender-option">Outro</label>
+                    <input
+                      type="radio"
+                      id="prefer-not-to-say"
+                      name="gender"
+                      value="prefer-not-to-say"
+                    />
+                    <label for="prefer-not-to-say" class="gender-option"
+                      >Prefiro não dizer</label
+                    >
+                  </div>
+                </div>
+                <input type="email" placeholder="Email" required />
+                <input
+                  type="tel"
+                  placeholder="Telefone/Fixo"
+                  id="telefone"
+                  required
+                  minlength="15"
+                  maxlength="15"
+                  pattern="\(\d{2}\) \d{5}-\d{4}"
+                />
+                <input
+                  type="text"
+                  placeholder="CEP"
+                  id="cadastro-cep"
+                  required
+                  maxlength="9"
+                />
+                <input type="text" placeholder="Rua" id="cadastro-rua" required />
+                <input type="text" placeholder="Número" id="cadastro-numero" required />
+                <input type="text" placeholder="Bairro" id="cadastro-bairro" required />
+                <input type="text" placeholder="Cidade" id="cadastro-cidade" required />
+                <input type="text" placeholder="Estado" id="cadastro-estado" required />
+                <input
+                  type="text"
+                  placeholder="CPF"
+                  id="cpf"
+                  required
+                  minlength="14"
+                  maxlength="14"
+                  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                />
+                <input type="password" placeholder="Senha" minlength="8" maxlength="15" />
+                <input type="password" placeholder="Confirmar Senha" required />
+                <button type="submit" class="auth-submit-btn">Registrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="aviso-topo">
+    FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA COMPRA
+  </div>
+  <div class="accessibility-float">
+  <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-solid fa-eye"></i>
+      </button>
+  <div class="accessibility-options">
+    <button id="toggle-theme" title="Alternar contraste">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <div class="font-controls">
+      <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+      <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+      <button class="accessibility-btn" onclick="resetFont()">A</button>
+    </div>
+  </div>
+  </div>
+    <button class="botao-voltar" onclick="history.back()">
+        <i class="fa fa-arrow-left"></i>
+      </button> 
+
+<div class="etapas-checkout">
+  <div class="etapa ativa">
+    <i class="fa fa-shopping-cart"></i>
+    <span>Carrinho</span>
+  </div>
+  <div class="etapa ativa">
+    <i class="fa fa-user"></i>
+    <span>Identificação</span>
+  </div>
+  <div class="etapa">
+    <i class="fa fa-credit-card"></i>
+    <span>Pagamento</span>
+  </div>
+  <div class="etapa">
+    <i class="fa fa-check-circle"></i>
+    <span>Confirmação</span>
+  </div>
+</div>
+
+  <main class="pagamento-container">
+    <div class="pagamento-header">
+      <h1 class="pagamento-title">Finalizar Compra</h1>
+    </div>
+    
+    <div class="pagamento-content">      
+      <div class="pagamento-form">
+        <form id="form-identificacao">
+          <div class="pagamento-section">
+            <h2 class="section-title">Informações de Entrega</h2>
+            <div class="form-group">
+              <label class="form-label">Nome completo</label>
+              <input type="text" class="form-input" id="nome" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">CEP</label>
+                <input type="text" class="form-input" id="cep" required pattern="\d{5}-?\d{3}" title="Digite o CEP no formato 00000-000">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Número</label>
+                <input type="text" class="form-input" id="numero" required pattern="\d+" title="Digite apenas números">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Endereço</label>
+              <input type="text" class="form-input" id="rua" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Bairro</label>
+                <input type="text" class="form-input" id="bairro" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cidade</label>
+                <input type="text" class="form-input" id="cidade" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estado</label>
+              <select class="form-input" id="estado" required>
+                <option value="">Selecione</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Complemento (opcional)</label>
+              <input type="text" class="form-input" id="complemento">
+            </div>
+          </div>
+          
+          <button class="checkout-btn" type="submit">Confirmar Pedido</button>
+        </form>
+        <a href="carrinho.html" class="voltar-carrinho">Voltar ao carrinho</a>
+      </div>
+    </div>
+  </main>
+
+  <button
+    class="botao-orcamento"
+   onclick="document.getElementById('modal-orcamento').style.display = 'flex'"
+   >
+  💬 Orçamento para Eventos Aqui!
+  </button>
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"
+          />
+          
+          <label>Email:</label>
+          <input type="email" required />
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required
+          />
+            <label>CEP:</label>
+<input type="text" id="orcamento-cep" placeholder="" required>
+<label>Rua:</label>
+<input type="text" id="orcamento-rua" placeholder="" required>
+<label>Bairro:</label>
+
+<input type="text" id="orcamento-bairro" placeholder="" required>
+<label>Cidade:</label>
+<input type="text" id="orcamento-cidade" placeholder="" required>
+<label>Estado:</label>
+<input type="text" id="orcamento-estado" placeholder="" required>
+  <label>Descrição:</label>
+  <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  <style>
+    /* Estilos específicos para a página de pagamento */
+    .pagamento-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .pagamento-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .pagamento-title {
+      font-size: 2rem;
+      color: #1a4f2b;
+    }
+
+    .pagamento-content {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pagamento-form {
+      flex: 1;
+      min-width: 400px;
+      margin: 0 auto;
+    }
+
+    .pagamento-resumo {
+      flex: 1;
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .pagamento-section {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1a4f2b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #28a745;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .metodo-pagamento {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .metodo-pagamento:hover {
+      border-color: #28a745;
+    }
+
+    .metodo-pagamento input[type="radio"] {
+      margin-right: 15px;
+    }
+
+    .metodo-pagamento-icon {
+      margin-right: 15px;
+      font-size: 1.5rem;
+      color: #555;
+    }
+
+    .metodo-pagamento-details {
+      flex: 1;
+    }
+
+    .metodo-pagamento-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .metodo-pagamento-desc {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .cartao-form {
+      margin-top: 15px;
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      display: none;
+    }
+
+    .cartao-form.active {
+      display: block;
+    }
+
+    .cartao-bandeiras {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .cartao-bandeira {
+      width: 40px;
+      height: 25px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+
+    .cartao-bandeira.active {
+      filter: none;
+      opacity: 1;
+    }
+
+    .resumo-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .resumo-label {
+      color: #666;
+    }
+
+    .resumo-value {
+      font-weight: 600;
+    }
+
+    .resumo-total {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .confirmar-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .confirmar-btn:hover {
+      background-color: #218838;
+    }
+
+    .voltar-carrinho {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #28a745;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .pagamento-content {
+        flex-direction: column;
+      }
+      
+      .pagamento-form, .pagamento-resumo {
+        width: 100%;
+        min-width: auto;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    /* Dark mode styles */
+    body.dark-mode .pagamento-resumo,
+    body.dark-mode .pagamento-section {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      border-color: #333;
+    }
+
+    body.dark-mode .section-title {
+      color: #4CAF50;
+      border-bottom-color: #333;
+    }
+
+    body.dark-mode .form-label {
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .form-input {
+      background-color: #333;
+      color: #e0e0e0;
+      border-color: #555;
+    }
+
+    body.dark-mode .metodo-pagamento {
+      background-color: #222;
+      border-color: #444;
+    }
+
+    body.dark-mode .metodo-pagamento:hover {
+      border-color: #4CAF50;
+    }
+
+    body.dark-mode .metodo-pagamento-desc {
+      color: #aaa;
+    }
+
+    body.dark-mode .cartao-form {
+      background-color: #222;
+      border-color: #444;
+    }
+
+    body.dark-mode .resumo-label {
+      color: #aaa;
+    }
+
+    body.dark-mode .resumo-total {
+      border-top-color: #444;
+    }
+     .etapas-checkout {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 10px;
+    }
+
+    .etapas-checkout .etapa {
+      flex: 1;
+      text-align: center;
+      color: #ccc;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .etapas-checkout .etapa i {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .etapas-checkout .etapa.ativa {
+      color: #28a745;
+    }
+
+    .etapas-checkout .etapa::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 100%;
+      height: 4px;
+      background-color: #ccc;
+      z-index: -1;
+      transform: translateY(-50%);
+    }
+
+    .etapas-checkout .etapa:last-child::after {
+      display: none;
+    }
+
+    .etapas-checkout .etapa.ativa::after {
+      background-color: #28a745;
+    }
+    .checkout-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  </style>
+
+  <footer id="contato">
+    <p>Contato: contato@biotech.com.br | (11) 1234-5678</p>
+    <p>&copy; 2025 BioTech. Todos os direitos reservados.</p>
+    <div class="redes-sociais">
+      <a href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector('.pagamento-section form') || document.querySelector('.pagamento-section');
+  const btn = document.querySelector('.checkout-btn');
+  if (btn && form) {
+    btn.addEventListener('click', function (e) {
+      // Pegue todos os campos do formulário
+      const campos = form.querySelectorAll('.form-input, select');
+      let dados = {};
+      campos.forEach(input => {
+        if (input.type === "select-one") {
+          dados[input.previousElementSibling.textContent.trim()] = input.value;
+        } else {
+          dados[input.previousElementSibling?.textContent?.trim() || ""] = input.value;
+        }
+      });
+      localStorage.setItem('dadosIdentificacao', JSON.stringify(dados));
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Máscara para CPF
+  const cpfInput = document.getElementById("cpf");
+  if (cpfInput) {
+    cpfInput.addEventListener("input", function () {
+      let v = cpfInput.value.replace(/\D/g, "");
+      if (v.length > 11) v = v.slice(0, 11);
+      v = v.replace(/(\d{3})(\d)/, "$1.$2");
+      v = v.replace(/(\d{3})(\d)/, "$1.$2");
+      v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+      cpfInput.value = v;
+    });
+  }
+
+  // Máscara para Telefone
+  const telInput = document.getElementById("telefone");
+  if (telInput) {
+    telInput.addEventListener("input", function () {
+      let v = telInput.value.replace(/\D/g, "");
+      if (v.length > 11) v = v.slice(0, 11);
+      v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+      v = v.replace(/(\d{5})(\d)/, "$1-$2");
+      telInput.value = v;
+    });
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cepInput = document.getElementById("cep");
+  if (cepInput) {
+    cepInput.addEventListener("blur", function () {
+      const cep = cepInput.value.replace(/\D/g, "");
+      if (cep.length === 8) {
+        // Exemplo de cálculo de frete por região (ajuste como quiser)
+        let frete = 29.90; // valor padrão
+        if (/^01|02|03|04|05|06|07|08|09/.test(cep)) {
+          frete = 15.00; // CEPs de SP capital, por exemplo
+        } else if (/^2[0-9]/.test(cep)) {
+          frete = 19.90; // Sudeste
+        } else if (/^7[0-9]/.test(cep)) {
+          frete = 39.90; // Nordeste
+        }
+        localStorage.setItem("freteCalculado", frete);
+      }
+    });
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Preenche os campos do formulário (apenas os que existem)
+  const nome = localStorage.getItem("userNome") || "";
+  const endereco = JSON.parse(localStorage.getItem("userEndereco") || "{}");
+
+  document.getElementById("nome").value = nome;
+  document.getElementById("cep").value = endereco.cep || "";
+  document.getElementById("rua").value = endereco.rua || "";
+  document.getElementById("numero").value = endereco.numero || "";
+  document.getElementById("bairro").value = endereco.bairro || "";
+  document.getElementById("cidade").value = endereco.cidade || "";
+  document.getElementById("estado").value = endereco.estado || "";
+
+  // Ao editar e salvar, atualiza o registro
+  document.getElementById("form-identificacao").addEventListener("submit", function(e) {
+    e.preventDefault();
+    localStorage.setItem("userNome", document.getElementById("nome").value);
+    localStorage.setItem("userEndereco", JSON.stringify({
+      cep: document.getElementById("cep").value,
+      rua: document.getElementById("rua").value,
+      numero: document.getElementById("numero").value,
+      bairro: document.getElementById("bairro").value,
+      cidade: document.getElementById("cidade").value,
+      estado: document.getElementById("estado").value
+    }));
+    window.location.href = "pagamento.html";
+  });
+});
+document.addEventListener("DOMContentLoaded", function () {
+  const cadastroCepInput = document.getElementById("cadastro-cep");
+  if (cadastroCepInput) {
+    cadastroCepInput.addEventListener("blur", function () {
+      const cep = cadastroCepInput.value.replace(/\D/g, "");
+      if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data.erro) {
+              document.getElementById("cadastro-rua").value = data.logradouro || "";
+              document.getElementById("cadastro-bairro").value = data.bairro || "";
+              document.getElementById("cadastro-cidade").value = data.localidade || "";
+              document.getElementById("cadastro-estado").value = data.uf || "";
+            }
+          });
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

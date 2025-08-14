@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho - BioTech</title>
+  <link rel="stylesheet" href="estilo/estilo.css" />
+  <link rel="stylesheet" href="estilo/carrinho.css" />
+  <script src="javascriptt/javascript.js" defer></script>
+  <script src="javascriptt/carrinho.js" defer></script>
+  <script src="javascriptt/geradordecep.js" defer></script>
+  <script src="javascriptt/login.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon">
+  
+</head>
+<body>
+   <div id="toast-notification" class="toast-notification"></div>
+  <header>
+    <div class="logo-nome">
+      <a href="index.html">
+        <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+      </a>
+      <h1>BioTech</h1>
+    </div>
+    <nav>      
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="metas.html">Metas</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><label for="auth-modal-toggle" class="auth-btn">Login ou Cadastro</label></li>
+      </ul>
+     <a href="carrinho.html" class="carrinho-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Carrinho" width="30">
+        <span id="contador-carrinho" ></span>
+        </a>
+      </div>
+      <div id="carrinho" class="carrinho-modal" onclick="this.style.display='none'">
+        <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+          <div class="carrinho-close" onclick="document.getElementById('carrinho').style.display='none'">&times;</div>
+          <h2>Seu Carrinho</h2>
+        </div>
+      </div>
+
+    
+    </nav>
+  </header>
+    <input type="checkbox" id="auth-modal-toggle" class="modal-toggle" />
+    <div class="auth-modal">
+      <label for="auth-modal-toggle" class="modal-overlay"></label>
+      <div class="auth-modal-content">
+        <label for="auth-modal-toggle" class="close-modal">&times;</label>
+        <div class="auth-tabs">
+          <input type="radio" id="login-tab" name="auth-tab" checked />
+          <input type="radio" id="register-tab" name="auth-tab" />
+          <div class="tab-labels">
+            <label for="login-tab" class="tab-btn">Login</label>
+            <label for="register-tab" class="tab-btn">Registrar</label>
+          </div>
+          <div class="tab-contents">
+            <div class="tab-content" id="login-content">
+              <form class="auth-form" action-login>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Senha" required />
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    margin: 8px 0 0 0;
+                  "
+                >
+                  <input type="checkbox" id="lembrar-senha" />
+                  Lembrar senha
+                </label>
+                <button type="submit" class="auth-submit-btn">Login</button>
+                <a href="esqueceu-a-senha.html" class="forgot-password"
+                  >Esqueceu a Senha?</a
+                >
+              </form>
+              <div class="social-login">
+                <a
+                  href="https://accounts.google.com/"
+                  class="social-btn google"
+                >
+                  <img
+                    src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg"
+                    alt="Google"
+                    class="google-icon"
+                  />
+                  Entrar com Google
+                </a>
+              </div>
+            </div>
+            <div class="tab-content" id="register-content">
+              <form class="auth-form" action-register>
+                <input
+                  type="text"
+                  placeholder="Nome inteiro"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <input type="date" required />
+                <input
+                  type="text"
+                  placeholder="Nome Materno"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <div class="gender-selection">
+                  <p class="gender-label">Sexo:</p>
+                  <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male" class="gender-option">Homem</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female" class="gender-option">Mulher</label>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other" class="gender-option">Outro</label>
+                    <input
+                      type="radio"
+                      id="prefer-not-to-say"
+                      name="gender"
+                      value="prefer-not-to-say"
+                    />
+                    <label for="prefer-not-to-say" class="gender-option"
+                      >Prefiro não dizer</label
+                    >
+                  </div>
+                </div>
+                <input type="email" placeholder="Email" required />
+                <input
+                  type="tel"
+                  placeholder="Telefone/Fixo"
+                  required
+                  minlength="15"
+                  maxlength="15"
+                  pattern="\(\d{2}\) \d{5}-\d{4}"
+                />
+                <input
+                  type="text"
+                  placeholder="CEP"
+                  id="cep"
+                  required
+                  maxlength="9"
+                />
+                <input type="text" placeholder="Rua" id="rua" required />
+                <input type="text" placeholder="Número" id="numero" required />
+                <input type="text" placeholder="Bairro" id="bairro" required />
+                <input type="text" placeholder="Cidade" id="cidade" required />
+                <input type="text" placeholder="Estado" id="estado" required />
+                <input
+                  type="text"
+                  placeholder="CPF"
+                  required
+                  minlength="14"
+                  maxlength="14"
+                  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  minlength="8"
+                  maxlength="15"
+                />
+                <input type="password" placeholder="Confirmar Senha" required />
+                <button type="submit" class="auth-submit-btn">Registrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="aviso-topo">
+    FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA COMPRA
+  </div>
+  <div class="accessibility-float">
+  <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-solid fa-eye"></i>
+      </button>
+  <div class="accessibility-options">
+    <button id="toggle-theme" title="Alternar contraste">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <div class="font-controls">
+      <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+      <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+      <button class="accessibility-btn" onclick="resetFont()">A</button>
+    </div>
+  </div>
+  </div>
+  <button class="botao-voltar" onclick="history.back()">
+    <i class="fa fa-arrow-left"></i>
+    </button>
+<div class="etapas-checkout">
+  <div class="etapa ativa">
+    <i class="fa fa-shopping-cart"></i>
+    <span>Carrinho</span>
+  </div>
+  <div class="etapa">
+    <i class="fa fa-user"></i>
+    <span>Identificação</span>
+  </div>
+  <div class="etapa">
+    <i class="fa fa-credit-card"></i>
+    <span>Pagamento</span>
+  </div>
+  <div class="etapa">
+    <i class="fa fa-check-circle"></i>
+    <span>Confirmação</span>
+  </div>
+</div>
+  <main class="carrinho-container">
+    <div class="carrinho-header">
+      <h1 class="carrinho-title">Meu Carrinho</h1>        
+    </div>    
+    <div class="carrinho-content">
+      <div class="carrinho-items">
+       <div class="carrinho-items" id="carrinho-itens-js">
+  <!-- Itens reais do carrinho aparecerão aqui via JS -->
+</div>     
+    
+      </div>      
+<div class="carrinho-summary">
+  <h3 class="summary-title">Resumo do Pedido</h3>
+
+  <!-- Campos de cupom e CEP fora do resumo -->
+<div style="display:flex;gap:32px;flex-wrap:wrap;margin-bottom:20px;">
+
+  <div>
+    <label for="campo-cep" style="font-weight:bold;"  >Calcule o Frete:</label>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="campo-cep" placeholder="Digite seu CEP" style="width:120px;">
+      <button type="button" id="calcular-frete">Calcular</button>
+      <button type="button" id="limpar-frete">Limpar</button>
+    </div>
+    <span id="cep-msg" style="color:#009688;font-size:13px;display:block;margin-top:6px;"></span>
+  </div>
+</div>
+
+
+  <div class="summary-row">
+    <span class="summary-label">Subtotal (<span id="qtd-itens">0</span> itens)</span>
+    <span class="summary-value" id="subtotal-carrinho">R$ 0,00</span>
+  </div>
+  <div class="summary-row">
+    <span class="summary-label">Frete</span>
+    <span class="summary-value" id="frete-carrinho">R$ 25,00</span>
+  </div>
+  <div class="summary-row">
+    <span class="summary-label">Descontos</span>
+    <span class="summary-value" id="desconto-carrinho">R$ 0,00</span>
+  </div>
+  <div class="summary-row total-row">
+    <span>Total</span>
+    <span id="total-carrinho">R$ 0,00</span>
+  </div>
+  <button class="checkout-btn" id="finalizar-compra">Finalizar Compra</button>
+  <a href="index.html" class="continue-shopping">Continuar comprando</a>
+</div>
+    </div>
+      <div>
+        <div class="campo-cupom">
+    <label for="campo-cupom" style="font-weight:bold;">Cupom:</label>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="campo-cupom" placeholder="Digite o cupom" style="width:120px;">
+      <button type="button" id="aplicar-cupom">Aplicar</button>
+      <span id="cupom-msg" style="color:#009688;font-size:13px;"></span>
+      <button type="button" id="remover-cupom" style="display:none;margin-left:8px;">Remover</button>
+    </div>
+  </div>
+  </main>
+<button class="botao-orcamento"
+   onclick="document.getElementById('modal-orcamento').style.display = 'flex'"
+   >
+  💬 Orçamento para Eventos Aqui!
+  </button>
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"
+          />
+          
+          <label>Email:</label>
+          <input type="email" required />
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required
+          />
+                     <label>CEP:</label>
+<input type="text" id="orcamento-cep" placeholder="" required>
+<label>Rua:</label>
+<input type="text" id="orcamento-rua" placeholder="" required>
+<label>Bairro:</label>
+
+<input type="text" id="orcamento-bairro" placeholder="" required>
+<label>Cidade:</label>
+<input type="text" id="orcamento-cidade" placeholder="" required>
+<label>Estado:</label>
+<input type="text" id="orcamento-estado" placeholder="" required>
+  <label>Descrição:</label>
+  <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  <style>
+    /* Estilos específicos para o carrinho */
+   
+    .carrinho-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .carrinho-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .carrinho-title {
+      font-size: 2rem;
+      color: #1a4f2b;
+    }
+
+    .carrinho-content {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .carrinho-items {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .carrinho-summary {
+      flex: 1;
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .carrinho-item {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .carrinho-item-img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .carrinho-item-details {
+      flex: 1;
+    }
+
+    .carrinho-item-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #1a4f2b;
+      margin-bottom: 5px;
+    }
+
+    .carrinho-item-price {
+      font-size: 1.1rem;
+      color: #28a745;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .carrinho-item-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .quantity-btn {
+      background-color: #f5f5f5;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .quantity-input {
+      width: 40px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      padding: 5px;
+    }
+
+    .remove-item {
+      color: #dc3545;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .summary-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1a4f2b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .summary-label {
+      color: #666;
+    }
+
+    .summary-value {
+      font-weight: 600;
+    }
+
+    .total-row {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .checkout-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background-color: #218838;
+    }
+
+    .continue-shopping {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #28a745;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .empty-cart-icon {
+      font-size: 50px;
+      color: #ddd;
+      margin-bottom: 20px;
+    }
+
+    .empty-cart-message {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .start-shopping-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    .start-shopping-btn:hover {
+      background-color: #218838;
+    }
+
+    @media (max-width: 768px) {
+      .carrinho-content {
+        flex-direction: column;
+      }
+      
+      .carrinho-items, .carrinho-summary {
+        width: 100%;
+      }
+    }
+   .etapas-checkout {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.etapas-checkout .etapa {
+  flex: 1;
+  text-align: center;
+  color: #ccc;
+  font-weight: 600;
+  position: relative;
+}
+
+.etapas-checkout .etapa i {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.etapas-checkout .etapa.ativa {
+  color: #28a745;
+}
+
+.etapas-checkout .etapa::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  height: 4px;
+  background-color: #ccc;
+  z-index: -1;
+  transform: translateY(-50%);
+}
+
+.etapas-checkout .etapa:last-child::after {
+  display: none;
+}
+
+.etapas-checkout .etapa.ativa::after {
+  background-color: #28a745;
+}
+
+#calcular-frete,
+#limpar-frete {
+  min-width: 110px;   /* largura mínima igual para ambos */
+  width: 110px;       /* largura fixa */
+  height: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 8px 0;
+  margin: 0;
+}
+
+#limpar-frete {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 40px;
+}
+
+#limpar-frete:hover {
+  background-color: #b52a37;
+}
+
+  </style>
+
+  
+
+  <footer id="contato">
+    <p>Contato: contato@biotech.com.br | (11) 1234-5678</p>
+    <p>&copy; 2025 BioTech. Todos os direitos reservados.</p>
+    <div class="redes-sociais">
+      <a href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+  <script src="javascriptt/carrinho.js" defer></script>
+
+</body>
+</html>

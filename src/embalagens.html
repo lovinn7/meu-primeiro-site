@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioTech</title>
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon" />
+    <script src="javascriptt/javascript.js" defer></script>
+    <script src="javascriptt/geradordecep.js" defer></script>
+    <script src="javascriptt/login.js"></script>
+     <script src="javascriptt/carrinho.js"></script>
+  </head>
+  <body>
+    <div id="toast-notification" class="toast-notification"></div>
+    <header>
+      <div class="logo-nome">
+        <a href="index.html">
+          <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+        </a>
+        <h1>BioTech</h1>
+      </div>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="sobre.html">Sobre Nós</a></li>
+          <li><a href="metas.html">Metas</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li>
+            <label for="auth-modal-toggle" class="auth-btn"
+              >Login ou Cadastro</label
+            >
+          </li>
+        </ul>
+        <a href="carrinho.html" class="carrinho-icon">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+            alt="Carrinho"
+            width="30"
+          />
+          <span id="contador-carrinho"></span>
+        </a>
+      </nav>
+      <div
+        id="carrinho"
+        class="carrinho-modal"
+        onclick="this.style.display='none'"
+      >
+        <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+          <div
+            class="carrinho-close"
+            onclick="document.getElementById('carrinho').style.display='none'"
+          >
+            &times;
+          </div>
+          <h2>Seu Carrinho</h2>
+        </div>
+      </div>
+    </header>
+    <input type="checkbox" id="auth-modal-toggle" class="modal-toggle" />
+    <div class="auth-modal">
+      <label for="auth-modal-toggle" class="modal-overlay"></label>
+      <div class="auth-modal-content">
+        <label for="auth-modal-toggle" class="close-modal">&times;</label>
+        <div id="toast-notification" class="toast-notification"></div>
+        <div class="auth-tabs">
+          <input type="radio" id="login-tab" name="auth-tab" checked />
+          <input type="radio" id="register-tab" name="auth-tab" />
+          <div class="tab-labels">
+            <label for="login-tab" class="tab-btn">Login</label>
+            <label for="register-tab" class="tab-btn">Registrar</label>
+          </div>
+          <div class="tab-contents">
+            <div class="tab-content" id="login-content">
+              <form class="auth-form" action-login>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Senha" required />
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    margin: 8px 0 0 0;
+                  "
+                >
+                  <input type="checkbox" id="lembrar-senha" />
+                  Lembrar senha
+                </label>
+                <button type="submit" class="auth-submit-btn">Login</button>
+                <a href="esqueceu-a-senha.html" class="forgot-password"
+                  >Esqueceu a Senha?</a
+                >
+              </form>
+              <div class="social-login">
+                <a
+                  href="https://accounts.google.com/"
+                  class="social-btn google"
+                >
+                  <img
+                    src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg"
+                    alt="Google"
+                    class="google-icon"
+                  />
+                  Entrar com Google
+                </a>
+              </div>
+            </div>
+            <div class="tab-content" id="register-content">
+              <form class="auth-form" action-register>
+                <input
+                  type="text"
+                  placeholder="Nome inteiro"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <input type="date" required />
+                <input
+                  type="text"
+                  placeholder="Nome Materno"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <div class="gender-selection">
+                  <p class="gender-label">Sexo:</p>
+                  <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male" class="gender-option">Homem</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female" class="gender-option">Mulher</label>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other" class="gender-option">Outro</label>
+                    <input
+                      type="radio"
+                      id="prefer-not-to-say"
+                      name="gender"
+                      value="prefer-not-to-say"
+                    />
+                    <label for="prefer-not-to-say" class="gender-option"
+                      >Prefiro não dizer</label
+                    >
+                  </div>
+                </div>
+                <input type="email" placeholder="Email" required />
+                <input
+                  type="tel"
+                  placeholder="Telefone/Fixo"
+                  required
+                  minlength="15"
+                  maxlength="15"
+                  pattern="\(\d{2}\) \d{5}-\d{4}"
+                />
+                <input
+                  type="text"
+                  placeholder="CEP"
+                  id="cep"
+                  required
+                  maxlength="9"
+                />
+                <input type="text" placeholder="Rua" id="rua" required />
+                <input type="text" placeholder="Número" id="numero" required />
+                <input type="text" placeholder="Bairro" id="bairro" required />
+                <input type="text" placeholder="Cidade" id="cidade" required />
+                <input type="text" placeholder="Estado" id="estado" required />
+                <input
+                  type="text"
+                  placeholder="CPF"
+                  required
+                  minlength="14"
+                  maxlength="14"
+                  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  minlength="8"
+                  maxlength="15"
+                />
+                <input type="password" placeholder="Confirmar Senha" required />
+                <button type="submit" class="auth-submit-btn">Registrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aviso-topo">
+      FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA
+      COMPRA
+    </div>
+    <div class="accessibility-float">
+      <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-eye"></i>
+      </button>
+      <div class="accessibility-options">
+        <button id="toggle-theme" title="Alternar contraste">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="font-controls">
+          <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+          <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+          <button class="accessibility-btn" onclick="resetFont()">A</button>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="slider-container">
+        <input type="radio" name="slider" id="slide1" checked />
+        <input type="radio" name="slider" id="slide2" />
+        <input type="radio" name="slider" id="slide3" />
+        <input type="radio" name="slider" id="slide4" />
+        <div class="slider">
+          <div class="slide">
+            <img
+              src="imagem/vista-aerea-da-floresta-amazonica-833392.jpg"
+              alt="Doação para o meio ambiente"
+            />
+            <div class="slide-caption">
+              <h3>Salve o Planeta: Sua Doação Faz a Diferença!</h3>
+              <p>Doe para a SOS Mata Atlântica.</p>
+              <a
+                href="https://www.sosma.org.br/"
+                target="_blank"
+                class="btn-doacao"
+                >Doar Agora →</a
+              >
+            </div>
+          </div>
+          <div class="slide">
+            <img
+              src="https://images.unsplash.com/photo-1467320424268-f91a16cf7c77"
+              alt="Impressora 3D"
+            />
+            <div class="slide-caption">
+              <h3>Descubra Como um Produto é Criado na Impressora 3D!</h3>
+              <p>Do design ao produto final em minutos.</p>
+              <a
+                href="https://www.youtube.com/watch?v=3eBzM4m2050"
+                target="_blank"
+                class="btn-video"
+                >▶ Assistir Vídeo</a
+              >
+            </div>
+          </div>
+          <div class="slide">
+            <img
+              src="https://images.pexels.com/photos/7551395/pexels-photo-7551395.jpeg"
+              alt="Família reciclando"
+            />
+            <div class="slide-caption">
+              <h3>Manual: Como Ser Ecológico em Casa e no Trabalho</h3>
+              <p>Dicas simples para reduzir seu impacto ambiental.</p>
+              <a
+                href="imagem/Manual - Sustentabilidade.pdf"
+                target="_blank"
+                class="btn-manual"
+                >📖 Baixar Manual</a
+              >
+            </div>
+          </div>
+          <div class="slide">
+            <img src="imagem/GTI.png" alt="Horta urbana" />
+            <div class="slide-caption">
+              <h3>Descarte Inteligente Começa Aqui! ♻️</h3>
+              <p>
+                O GTI (Get Trash Intelligence) é uma plataforma inovadora que
+                conecta indivíduos que precisam descartar resíduos de maneira
+                adequada com profissionais especializados em coleta seletiva.
+              </p>
+              <a
+                href="https://gettrashintelligence.netlify.app/"
+                target="_blank"
+                class="btn-horta"
+                >Acesse o Site →</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="navigation-dots">
+          <a href="#slide1" class="dot"></a>
+          <a href="#slide2" class="dot"></a>
+          <a href="#slide3" class="dot"></a>
+          <a href="#slide4" class="dot"></a>
+        </div>
+      </div>
+      <button class="botao-voltar" onclick="history.back()">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <div class="catalogo">
+        <div class="cards card1">
+          <img src="imagem/foto bandejas.jpg" alt="imagem 1" />
+          <h1>Bandejas</h1>
+          <p>
+            Bandeja retangular feita de fibra natural (tipo bagaço de cana), com
+            divisória interna. Textura resistente e acabamento fosco, ideal para
+            refeições prontas. Logo "biotech" impresso em verde escuro na tampa.
+            Perfeita para delivery sustentável.
+          </p>
+          <label for="auth-modal-toggle" class="btn1 btn-comprar"
+            >COMPRAR</label
+          >
+        </div>
+        <div class="cards card2">
+          <img src="imagem/embalagem de batata.jpg" alt="imagem 2" />
+          <h1>Cone</h1>
+          <p>
+            Embalagens cônicas em papel kraft natural, com a marca “biotech”
+            impressa em verde. Visual limpo e ecológico, ideais para lanches
+            rápidos. Biodegradáveis, recicláveis e com apelo visual
+            sustentável.<br /><br />
+          </p>
+          <label for="auth-modal-toggle" class="btn1 btn-comprar"
+            >COMPRAR</label
+          >
+        </div>
+        <div class="cards card3">
+          <img src="imagem/potes.jpg" alt="imagem 3" />
+          <h1>Potes</h1>
+          <p>
+            Potes arredondados com tampa, fabricados com material compostável.
+            Design moderno, ideais para sopas, saladas ou sobremesas.
+            Reutilizáveis por curto prazo e 100% biodegradáveis.<br /><br />
+          </p>
+          <label for="auth-modal-toggle" class="btn1 btn-comprar"
+            >COMPRAR</label
+          >
+        </div>
+        <div class="cards card4">
+          <img src="imagem/garfos.jpg" alt="imagem 4" />
+          <h1>Talheres</h1>
+          <p>
+            Talheres ecológicos em tom off-white, feitos com amido de milho ou
+            PLA. Acabamento liso, resistentes ao calor e líquidos. O logo
+            “biotech” está gravado na base dos cabos, reforçando a identidade
+            sustentável da marca.
+          </p>
+          <label for="auth-modal-toggle" class="btn1 btn-comprar"
+            >COMPRAR</label
+          >
+        </div>
+        <div class="cards card5">
+          <img src="imagem/marmita.png" alt="imagem 5" />
+          <h1>Marmitas</h1>
+          <p>
+            Embalagem sustentável feita de fibra natural, ideal para refeições.
+            Possui tampa com logo "biotech" em verde, destacando o compromisso
+            ecológico. Visual rústico e moderno, perfeita para delivery
+            consciente.
+          </p>
+          <label for="auth-modal-toggle" class="btn1 btn-comprar"
+            >COMPRAR</label
+          >
+        </div>
+      </div>
+    </main>
+    <button
+      class="botao-orcamento"
+      onclick="document.getElementById('modal-orcamento').style.display = 'flex'"
+    >
+      💬 Orçamento para Eventos Aqui!
+    </button>
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"
+          />
+
+          <label>Email:</label>
+          <input type="email" required />
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required
+          />
+          <label>CEP:</label>
+          <input type="text" id="orcamento-cep" placeholder="" required />
+          <label>Rua:</label>
+          <input type="text" id="orcamento-rua" placeholder="" required />
+          <label>Bairro:</label>
+
+          <input type="text" id="orcamento-bairro" placeholder="" required />
+          <label>Cidade:</label>
+          <input type="text" id="orcamento-cidade" placeholder="" required />
+          <label>Estado:</label>
+          <input type="text" id="orcamento-estado" placeholder="" required />
+          <label>Descrição:</label>
+          <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+    <footer id="contato">
+      <p>Contato: contato@biotech.com.br | (11) 1234-5678</p>
+      <p>&copy; 2025 BioTech. Todos os direitos reservados.</p>
+      <div class="redes-sociais">
+        <a
+          href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr"
+          target="_blank"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+            alt="Instagram"
+          />
+        </a>
+        <a href="" target="_blank">
+          <img
+            src="https://imagepng.org/wp-content/uploads/2017/08/WhatsApp-icone.png"
+            alt="Instagram"
+          />
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento - BioTech</title>
+  <link rel="stylesheet" href="estilo/estilo.css" />
+  <script src="javascriptt/javascript.js" defer></script>
+  <script src="javascriptt/login.js" defer></script>
+  <script src="javascriptt/carrinho.js" defer></script>
+  <script src="javascriptt/geradordecep.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon">  
+</head>
+<body>
+   <div id="toast-notification" class="toast-notification"></div>
+  <header>
+    <div class="logo-nome">
+      <a href="index.html">
+        <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+      </a>
+      <h1>BioTech</h1>
+    </div>
+    <nav>      
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sobre.html">Sobre Nós</a></li>
+        <li><a href="metas.html">Metas</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><label for="auth-modal-toggle" class="auth-btn">Login ou Cadastro</label></li>
+      </ul>
+       <a href="carrinho.html" class="carrinho-icon">     
+        <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Carrinho" width="30">
+         <span id="contador-carrinho" ></span>
+        </a>
+      </div>
+      <div id="carrinho" class="carrinho-modal" onclick="this.style.display='none'">
+        <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+          <div class="carrinho-close" onclick="document.getElementById('carrinho').style.display='none'">&times;</div>
+          <h2>Seu Carrinho</h2>
+        </div>
+      </div>
+    </nav>
+  </header>
+<input type="checkbox" id="auth-modal-toggle" class="modal-toggle">
+<div class="auth-modal">
+  <label for="auth-modal-toggle" class="modal-overlay"></label>
+  <div class="auth-modal-content">
+    <label for="auth-modal-toggle" class="close-modal">&times;</label>
+    <div class="auth-tabs">
+      <input type="radio" id="login-tab" name="auth-tab" checked>
+      <input type="radio" id="register-tab" name="auth-tab">
+      <div class="tab-labels">
+        <label for="login-tab" class="tab-btn">Login</label>
+        <label for="register-tab" class="tab-btn">Registrar</label>
+      </div>
+      <div class="tab-contents">
+        <div class="tab-content" id="login-content">
+          <form class="auth-form" action-login>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Senha" required>
+            <label
+              style="display: flex; align-items: center; gap: 4px; margin: 8px 0 0 0;"
+            >
+              <input type="checkbox" id="lembrar-senha" />
+              Lembrar senha
+            </label>
+            <button type="submit" class="auth-submit-btn">Login</button>
+            <a href="esqueceu-a-senha.html" class="forgot-password">Esqueceu a Senha?</a>
+          </form>
+          <div class="social-login">
+            <a href="https://accounts.google.com/" class="social-btn google">
+              <img src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg" alt="Google" class="google-icon">
+              Entrar com Google
+            </a>
+          </div>
+        </div>
+        <div class="tab-content" id="register-content">
+          <form class="auth-form" action-register>
+            <input type="text" placeholder="Nome inteiro" minlength="11" maxlength="60" required>
+            <input type="date" required>
+            <input type="text" placeholder="Nome Materno" minlength="11" maxlength="60" required>
+            <div class="gender-selection">
+              <p class="gender-label">Sexo:</p>
+              <div class="gender-options">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male" class="gender-option">Homem</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" class="gender-option">Mulher</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other" class="gender-option">Outro</label>
+                <input type="radio" id="prefer-not-to-say" name="gender" value="prefer-not-to-say">
+                <label for="prefer-not-to-say" class="gender-option">Prefiro não dizer</label>
+              </div>
+            </div>
+            <input type="email" placeholder="Email" required>
+            <input
+              type="tel"
+              placeholder="Telefone/Fixo"
+              required
+              minlength="15"
+              maxlength="15"
+              pattern="\(\d{2}\) \d{5}-\d{4}"
+            >
+            <input
+              type="text"
+              placeholder="CEP"
+              id="cep"
+              required
+              maxlength="9"
+            >
+            <input type="text" placeholder="Rua" id="rua" required>
+            <input type="text" placeholder="Número" id="numero" required>
+            <input type="text" placeholder="Bairro" id="bairro" required>
+            <input type="text" placeholder="Cidade" id="cidade" required>
+            <input type="text" placeholder="Estado" id="estado" required>
+            <input
+              type="text"
+              placeholder="CPF"
+              required
+              minlength="14"
+              maxlength="14"
+              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+            >
+            <input type="password" placeholder="Senha" minlength="8" maxlength="15" required>
+            <input type="password" placeholder="Confirmar Senha" required>
+            <button type="submit" class="auth-submit-btn">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="aviso-topo">
+    FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA COMPRA
+  </div>
+  <div class="accessibility-float">
+  <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-solid fa-eye"></i>
+      </button>
+  <div class="accessibility-options">
+    <button id="toggle-theme" title="Alternar contraste">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <div class="font-controls">
+      <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+      <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+      <button class="accessibility-btn" onclick="resetFont()">A</button>
+    </div>
+  </div>
+  </div>
+    <button class="botao-voltar" onclick="history.back()">
+        <i class="fa fa-arrow-left"></i>
+      </button> 
+
+<div class="etapas-checkout">
+  <div class="etapa ativa">
+    <i class="fa fa-shopping-cart"></i>
+    <span>Carrinho</span>
+  </div>
+  <div class="etapa ativa">
+    <i class="fa fa-user"></i>
+    <span>Identificação</span>
+  </div>
+  <div class="etapa ativa">
+    <i class="fa fa-credit-card"></i>
+    <span>Pagamento</span>
+  </div>
+  <div class="etapa">
+    <i class="fa fa-check-circle"></i>
+    <span>Confirmação</span>
+  </div>
+</div>
+
+  <main class="pagamento-container">
+  <div class="pagamento-content">
+    <!-- Formulário de pagamento à esquerda -->
+    <div class="pagamento-form">
+      <div class="pagamento-section">
+        <h2 class="section-title">Método de Pagamento</h2>
+        
+        <label class="metodo-pagamento">
+          <input type="radio" name="metodo-pagamento" value="cartao" checked>
+          <i class="fa-solid fa-credit-card metodo-pagamento-icon"></i>
+          <div class="metodo-pagamento-details">
+            <div class="metodo-pagamento-title">Cartão de Crédito</div>
+            <div class="metodo-pagamento-desc">Pague em até 12x sem juros</div>
+          </div>
+        </label>
+
+        <div class="cartao-form active">
+          <div class="cartao-bandeiras">
+            <img src="imagem/visa.png" class="cartao-bandeira active" alt="Visa">
+            <img src="imagem/master.png" class="cartao-bandeira active" alt="Mastercard">
+            <img src="imagem/elo.png" class="cartao-bandeira active" alt="Elo">
+            <img src="imagem/hipercard-logo.png" class="cartao-bandeira active" alt="Hipercard">
+            <img src="imagem/american.png" class="cartao-bandeira" alt="American Express">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Número do Cartão</label>
+            <input type="text" class="form-input" placeholder="0000 0000 0000 0000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nome no Cartão</label>
+            <input type="text" class="form-input" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Validade</label>
+              <input type="text" class="form-input" placeholder="MM/AA" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV</label>
+              <input type="text" class="form-input" placeholder="000" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Parcelas</label>
+            <select class="form-input" required>
+              <option value="">Selecione</option>
+              <option value="1">1x de R$ 129,70 sem juros</option>
+              <option value="2">2x de R$ 64,85 sem juros</option>
+              <option value="3">3x de R$ 43,23 sem juros</option>
+              <option value="4">4x de R$ 32,43 sem juros</option>
+              <option value="5">5x de R$ 25,94 sem juros</option>
+              <option value="6">6x de R$ 21,62 sem juros</option>
+              <option value="7">7x de R$ 18,53 sem juros</option>
+              <option value="8">8x de R$ 16,21 sem juros</option>
+              <option value="9">9x de R$ 14,41 sem juros</option>
+              <option value="10">10x de R$ 12,97 sem juros</option>
+              <option value="11">11x de R$ 11,79 sem juros</option>
+              <option value="12">12x de R$ 10,81 sem juros</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="metodo-pagamento">
+          <input type="radio" name="metodo-pagamento" value="pix">
+          <i class="fa-solid fa-qrcode metodo-pagamento-icon"></i>
+          <div class="metodo-pagamento-details">
+            <div class="metodo-pagamento-title">PIX</div>
+            <div class="metodo-pagamento-desc">Pagamento instantâneo com 5% de desconto</div>
+          </div>
+        </label>
+
+        <label class="metodo-pagamento">
+          <input type="radio" name="metodo-pagamento" value="boleto">
+          <i class="fa-solid fa-barcode metodo-pagamento-icon"></i>
+          <div class="metodo-pagamento-details">
+            <div class="metodo-pagamento-title">Boleto Bancário</div>
+            <div class="metodo-pagamento-desc">Pagamento em até 2 dias úteis</div>
+          </div>
+        </label>
+      </div>
+    </div>
+    <!-- Resumo do pedido à direita -->
+    <div class="pagamento-resumo">
+      <h2 class="section-title">Resumo do Pedido</h2>
+      <div class="resumo-item">
+        <span class="resumo-label" id="qtd-itens-pag">Subtotal (0 itens)</span>
+        <span class="resumo-value" id="subtotal-pag">R$ 0,00</span>
+      </div>
+      <div class="resumo-item">
+        <span class="resumo-label">Frete</span>
+        <span class="resumo-value" id="frete-pag">R$ 0,00</span>
+      </div>
+      <div class="resumo-item">
+        <span class="resumo-label">Descontos</span>
+        <span class="resumo-value" id="descontos-pag">R$ 0,00</span>
+      </div>
+      <div class="resumo-item resumo-total">
+        <span class="resumo-label">Total</span>
+        <span class="resumo-value" id="total-pag">R$ 0,00</span>
+      </div>
+      <button class="confirmar-btn" onclick="location.href='confirmação.html'">Confirmar Pagamento</button>
+      <a href="identificacao.html" class="voltar-carrinho">Voltar</a>
+      <div class="beneficio destaque-sustentavel">
+  <h3>🌱 Sustentabilidade</h3>
+  <p>Ao finalizar sua compra, você estará contribuindo para um planeta mais verde. Cada produto BioTech evita o uso de plásticos descartáveis.</p>
+</div>
+
+      <!-- Adicione após o botão Confirmar Pagamento -->
+<button id="gerar-boleto-btn" style="display:none;margin-top:10px;">Gerar Boleto PDF</button>
+    </div>
+  </div>
+</main>
+
+  <button
+    class="botao-orcamento"
+   onclick="document.getElementById('modal-orcamento').style.display = 'flex'"
+   >
+  💬 Orçamento para Eventos Aqui!
+  </button>
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"  />
+      
+          <label>Email:</label>
+          <input type="email" required />
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required/>
+           <label>CEP:</label>
+<input type="text" id="orcamento-cep" placeholder="" required>
+<label>Rua:</label>
+<input type="text" id="orcamento-rua" placeholder="" required>
+<label>Bairro:</label>
+
+<input type="text" id="orcamento-bairro" placeholder="" required>
+<label>Cidade:</label>
+<input type="text" id="orcamento-cidade" placeholder="" required>
+<label>Estado:</label>
+<input type="text" id="orcamento-estado" placeholder="" required>
+  <label>Descrição:</label>
+  <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+  <style>
+    /* Estilos específicos para a página de pagamento */
+    .pagamento-container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .pagamento-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .pagamento-title {
+      font-size: 2rem;
+      color: #1a4f2b;
+    }
+
+    .pagamento-content {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pagamento-form {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    .pagamento-resumo {
+      flex: 1;
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .pagamento-section {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1a4f2b;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #28a745;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .metodo-pagamento {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .metodo-pagamento:hover {
+      border-color: #28a745;
+    }
+
+    .metodo-pagamento input[type="radio"] {
+      margin-right: 15px;
+    }
+
+    .metodo-pagamento-icon {
+      margin-right: 15px;
+      font-size: 1.5rem;
+      color: #555;
+    }
+
+    .metodo-pagamento-details {
+      flex: 1;
+    }
+
+    .metodo-pagamento-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .metodo-pagamento-desc {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .cartao-form {
+      margin-top: 15px;
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      display: none;
+    }
+
+    .cartao-form.active {
+      display: block;
+    }
+
+    .cartao-bandeiras {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .cartao-bandeira {
+      width: 40px;
+      height: 25px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.5;
+      transition: all 0.3s;
+    }
+
+    .cartao-bandeira.active {
+      filter: none;
+      opacity: 1;
+    }
+
+    .resumo-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .resumo-label {
+      color: #666;
+    }
+
+    .resumo-value {
+      font-weight: 600;
+    }
+
+    .resumo-total {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .confirmar-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .confirmar-btn:hover {
+      background-color: #218838;
+    }
+
+    .voltar-carrinho {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #28a745;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .pagamento-content {
+        flex-direction: column;
+      }
+      
+      .pagamento-form, .pagamento-resumo {
+        width: 100%;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    /* Dark mode styles */
+    body.dark-mode .pagamento-resumo,
+    body.dark-mode .pagamento-section {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      border-color: #333;
+    }
+
+    body.dark-mode .section-title {
+      color: #4CAF50;
+      border-bottom-color: #333;
+    }
+
+    body.dark-mode .form-label {
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .form-input {
+      background-color: #333;
+      color: #e0e0e0;
+      border-color: #555;
+    }
+
+    body.dark-mode .metodo-pagamento {
+      background-color: #222;
+      border-color: #444;
+    }
+
+    body.dark-mode .metodo-pagamento:hover {
+      border-color: #4CAF50;
+    }
+
+    body.dark-mode .metodo-pagamento-desc {
+      color: #aaa;
+    }
+
+    body.dark-mode .cartao-form {
+      background-color: #222;
+      border-color: #444;
+    }
+
+    body.dark-mode .resumo-label {
+      color: #aaa;
+    }
+
+    body.dark-mode .resumo-total {
+      border-top-color: #444;
+    }
+     .etapas-checkout {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.etapas-checkout .etapa {
+  flex: 1;
+  text-align: center;
+  color: #ccc;
+  font-weight: 600;
+  position: relative;
+}
+
+.etapas-checkout .etapa i {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.etapas-checkout .etapa.ativa {
+  color: #28a745;
+}
+
+.etapas-checkout .etapa::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  height: 4px;
+  background-color: #ccc;
+  z-index: -1;
+  transform: translateY(-50%);
+}
+
+.etapas-checkout .etapa:last-child::after {
+  display: none;
+}
+
+.etapas-checkout .etapa.ativa::after {
+  background-color: #28a745;
+}
+
+  </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Toast no topo do modal
+        function showToast(msg) {
+          const toast = document.getElementById("toast-notification");
+          if (!toast) return;
+          toast.textContent = msg;
+          toast.classList.add("show");
+          toast.classList.remove("hide");
+          setTimeout(() => {
+            toast.classList.add("hide");
+            setTimeout(() => {
+              toast.classList.remove("show");
+              toast.style.display = "none";
+            }, 400);
+          }, 2200);
+          toast.style.display = "block";
+        }
+
+        // Avatar menu
+        function mostrarUsuario(nome) {
+          let navMenu = document.querySelector("nav .menu");
+          let loginLi = navMenu.querySelector("li .auth-btn")?.parentElement;
+          if (loginLi) loginLi.style.display = "none";
+          let avatarLi = document.getElementById("user-avatar");
+          if (!avatarLi) {
+            avatarLi = document.createElement("li");
+            avatarLi.id = "user-avatar";
+            avatarLi.style.position = "relative";
+            avatarLi.style.display = "flex";
+            avatarLi.style.alignItems = "center";
+            avatarLi.style.gap = "8px";
+            avatarLi.style.cursor = "pointer";
+            avatarLi.innerHTML = `
+        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(
+          nome
+        )}&background=009688&color=fff&rounded=true&size=32" alt="Avatar" style="border-radius:50%;width:32px;height:32px;">
+        <span style="font-weight:bold;">${nome.split(" ")[0]}</span>
+        <div id="avatar-menu" style="display:none;position:absolute;top:40px;right:0;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;z-index:999;">
+          <ul style="list-style:none;padding:8px 0;margin:0;">
+            <li style="padding:8px 20px;cursor:pointer;" id="menu-historico">Histórico de Compras</li>
+            <li style="padding:8px 20px;cursor:pointer;" id="menu-config">Configurações do Usuário</li>
+            <li style="padding:8px 20px;cursor:pointer;color:#e53935;" id="menu-logout">Sair</li>
+          </ul>
+        </div>
+      `;
+            navMenu.appendChild(avatarLi);
+
+            avatarLi.addEventListener("click", function (e) {
+              e.stopPropagation();
+              let menu = document.getElementById("avatar-menu");
+              menu.style.display =
+                menu.style.display === "block" ? "none" : "block";
+            });
+            document.addEventListener("click", function () {
+              let menu = document.getElementById("avatar-menu");
+              if (menu) menu.style.display = "none";
+            });
+                      document.getElementById("menu-logout").onclick = function (e) {
+  e.stopPropagation();
+  localStorage.setItem("userLogado", "false");
+  localStorage.removeItem("carrinho"); // <- zera o carrinho ao sair
+  atualizarContadorCarrinho();        // <- atualiza o ícone do carrinho
+  avatarLi.remove();
+  if (loginLi) loginLi.style.display = "";
+  showToast("Você saiu da conta.");
+};
+            const menuHistorico = document.getElementById("menu-historico");
+            if (menuHistorico) {
+              menuHistorico.onclick = function (e) {
+                e.stopPropagation();
+                window.location.href = "historico.html";
+              };
+            }
+            const menuConfig = document.getElementById("menu-config");
+            if (menuConfig) {
+              menuConfig.onclick = function (e) {
+                e.stopPropagation();
+                window.location.href = "dados.html";
+              };
+            }
+          } else {
+            avatarLi.querySelector("span").textContent = nome.split(" ")[0];
+            avatarLi.querySelector(
+              "img"
+            ).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+              nome
+            )}&background=009688&color=fff&rounded=true&size=32`;
+          }
+        }
+
+        // Limpa todos os campos de um form
+        function limparCampos(form) {
+          if (!form) return;
+          form.querySelectorAll("input").forEach((input) => {
+            if (input.type === "checkbox" || input.type === "radio") {
+              input.checked = false;
+            } else {
+              input.value = "";
+            }
+          });
+        }
+
+        // Preenche campos de login se lembrar senha estiver ativo
+        function preencherLoginSeLembrado() {
+          const loginForm = document.querySelector(".auth-form[action-login]");
+          if (!loginForm) return;
+          const lembrar = localStorage.getItem("lembrarSenha") === "true";
+          const email = localStorage.getItem("userEmail") || "";
+          const senha = localStorage.getItem("userSenha") || "";
+          loginForm.querySelector('input[type="email"]').value = lembrar
+            ? email
+            : "";
+          loginForm.querySelector('input[type="password"]').value = lembrar
+            ? senha
+            : "";
+          const checkbox = document.getElementById("lembrar-senha");
+          if (checkbox) checkbox.checked = lembrar;
+        }
+
+        // Troca de abas: limpa campos do cadastro e login
+        function setupTabLimpeza() {
+          const loginTab = document.getElementById("login-tab");
+          const registerTab = document.getElementById("register-tab");
+          const loginForm = document.querySelector(".auth-form[action-login]");
+          const registerForm = document.querySelector(
+            ".auth-form[action-register]"
+          );
+
+          if (loginTab && registerTab && loginForm && registerForm) {
+            loginTab.addEventListener("change", function () {
+              limparCampos(registerForm);
+              preencherLoginSeLembrado();
+            });
+            registerTab.addEventListener("change", function () {
+              limparCampos(registerForm);
+              limparCampos(loginForm);
+            });
+          }
+        }
+
+        // CPF
+        const cpfInput = document.querySelector('input[placeholder="CPF"]');
+        if (cpfInput) {
+          cpfInput.addEventListener("input", function () {
+            let v = cpfInput.value.replace(/\D/g, "");
+            v = v.replace(/(\d{3})(\d)/, "$1.$2");
+            v = v.replace(/(\d{3})(\d)/, "$1.$2");
+            v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            cpfInput.value = v;
+          });
+        }
+
+        // Telefone
+        const telInput = document.querySelector(
+          'input[placeholder="Telefone/Fixo"]'
+        );
+        if (telInput) {
+          telInput.addEventListener("input", function () {
+            let v = telInput.value.replace(/\D/g, "");
+            v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+            v = v.replace(/(\d{5})(\d)/, "$1-$2");
+            telInput.value = v;
+          });
+        }
+
+        // Função para verificar login
+        function isUserLoggedIn() {
+          return (
+            localStorage.getItem("userNome") &&
+            localStorage.getItem("userEmail") &&
+            localStorage.getItem("userSenha")
+          );
+        }
+
+        // Lógica do botão COMPRAR
+        document.querySelectorAll(".btn-comprar").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (isUserLoggedIn()) {
+              showToast("Produto adicionado ao carrinho!");
+              // Aqui você pode adicionar lógica real de adicionar ao carrinho, se quiser
+            } else {
+              document.getElementById("auth-modal-toggle").checked = true;
+              showToast("Faça login para comprar!");
+            }
+          });
+        });
+
+        // REGISTRO
+        const registerForm = document.querySelector(
+          ".auth-form[action-register]"
+        );
+        if (registerForm) {
+          registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nome = registerForm
+              .querySelector('input[placeholder="Nome inteiro"]')
+              .value.trim();
+            const nomeMaterno = registerForm
+              .querySelector('input[placeholder="Nome Materno"]')
+              .value.trim();
+            const email = registerForm
+              .querySelector('input[type="email"]')
+              .value.trim();
+            const telefone = registerForm
+              .querySelector('input[placeholder="Telefone/Fixo"]')
+              .value.trim();
+            const cpf = registerForm
+              .querySelector('input[placeholder="CPF"]')
+              .value.trim();
+            const senha = registerForm.querySelector(
+              'input[placeholder="Senha"]'
+            ).value;
+            const senha2 = registerForm.querySelector(
+              'input[placeholder="Confirmar Senha"]'
+            ).value;
+            // Endereço
+            const cep = registerForm.querySelector("#cep").value.trim();
+            const rua = registerForm.querySelector("#rua").value.trim();
+            const numero = registerForm.querySelector("#numero").value.trim();
+            const bairro = registerForm.querySelector("#bairro").value.trim();
+            const cidade = registerForm.querySelector("#cidade").value.trim();
+            const estado = registerForm.querySelector("#estado").value.trim();
+
+            if (
+              !nome ||
+              !nomeMaterno ||
+              !email ||
+              !telefone ||
+              !cpf ||
+              !senha ||
+              !senha2 ||
+              !cep ||
+              !rua ||
+              !numero ||
+              !bairro ||
+              !cidade ||
+              !estado
+            ) {
+              showToast("Preencha todos os campos obrigatórios.");
+              return;
+            }
+            if (senha !== senha2) {
+              showToast("As senhas não coincidem.");
+              return;
+            }
+            localStorage.setItem("userNome", nome);
+            localStorage.setItem("userNomeMaterno", nomeMaterno);
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userTelefone", telefone);
+            localStorage.setItem("userCPF", cpf);
+            localStorage.setItem("userSenha", senha);
+            localStorage.setItem(
+              "userEndereco",
+              JSON.stringify({ cep, rua, numero, bairro, cidade, estado })
+            );
+            document.getElementById("auth-modal-toggle").checked = true;
+            document.getElementById("login-tab").checked = true;
+            limparCampos(registerForm);
+            showToast("Cadastro realizado com sucesso!");
+          });
+        }
+
+        // Salvar lembrar senha ao marcar/desmarcar o checkbox
+        const lembrarSenhaCheckbox = document.getElementById("lembrar-senha");
+        if (lembrarSenhaCheckbox) {
+          lembrarSenhaCheckbox.addEventListener("change", function () {
+            localStorage.setItem(
+              "lembrarSenha",
+              this.checked ? "true" : "false"
+            );
+          });
+        }
+
+        // LOGIN
+        const loginForm = document.querySelector(".auth-form[action-login]");
+        if (loginForm) {
+          loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = loginForm.querySelector('input[type="email"]').value;
+            const senha = loginForm.querySelector(
+              'input[type="password"]'
+            ).value;
+            const savedEmail = localStorage.getItem("userEmail");
+            const savedSenha = localStorage.getItem("userSenha");
+            const savedNome = localStorage.getItem("userNome");
+            const lembrar = document.getElementById("lembrar-senha").checked;
+
+            // Salva email/senha se lembrar senha estiver marcado
+            if (lembrar) {
+              localStorage.setItem("lembrarSenha", "true");
+              localStorage.setItem("userEmail", email);
+              localStorage.setItem("userSenha", senha);
+            } else {
+              localStorage.setItem("lembrarSenha", "false");
+            }
+
+            if (email === savedEmail && senha === savedSenha && savedNome) {
+              localStorage.setItem("userLogado", "true");
+              mostrarUsuario(savedNome);
+              document.getElementById("auth-modal-toggle").checked = false;
+              limparCampos(loginForm);
+              showToast("Login realizado com sucesso!");
+            } else {
+              showToast("Usuário ou senha inválidos. Cadastre-se primeiro.");
+            }
+          });
+        }
+
+        // Limpa campos ao abrir modal e preenche login se lembrar senha
+        document
+          .getElementById("auth-modal-toggle")
+          ?.addEventListener("change", function (e) {
+            if (this.checked) {
+              limparCampos(
+                document.querySelector(".auth-form[action-register]")
+              );
+              limparCampos(document.querySelector(".auth-form[action-login]"));
+              preencherLoginSeLembrado();
+            }
+          });
+
+        // Troca de abas limpa campos
+        setupTabLimpeza();
+
+        // Exibir avatar se usuário já estiver logado
+        const savedNome = localStorage.getItem("userNome");
+        const savedEmail = localStorage.getItem("userEmail");
+        const savedSenha = localStorage.getItem("userSenha");
+        const userLogado = localStorage.getItem("userLogado") === "true";
+        if (savedNome && savedEmail && savedSenha && userLogado) {
+          mostrarUsuario(savedNome);
+        }
+
+        // Preenchimento automático de endereço pelo CEP
+        const cepInput = document.getElementById("cep");
+        if (cepInput) {
+          cepInput.addEventListener("blur", function () {
+            const cep = cepInput.value.replace(/\D/g, "");
+            if (cep.length === 8) {
+              fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then((res) => res.json())
+                .then((data) => {
+                  if (!data.erro) {
+                    document.getElementById("rua").value =
+                      data.logradouro || "";
+                    document.getElementById("bairro").value = data.bairro || "";
+                    document.getElementById("cidade").value =
+                      data.localidade || "";
+                    document.getElementById("estado").value = data.uf || "";
+                  }
+                });
+            }
+          });
+        }
+      });
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const radios = document.querySelectorAll('input[name="metodo-pagamento"]');
+  const btnBoleto = document.getElementById('gerar-boleto-btn');
+  radios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'boleto') {
+        btnBoleto.style.display = 'block';
+      } else {
+        btnBoleto.style.display = 'none';
+      }
+    });
+  });
+
+  // Geração do PDF do boleto
+  btnBoleto.addEventListener('click', function () {
+    const dados = JSON.parse(localStorage.getItem('dadosIdentificacao') || '{}');
+    const valor = document.querySelector('.resumo-total .resumo-value')?.textContent || 'R$ 0,00';
+    const doc = new window.jspdf.jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('BOLETO BANCÁRIO', 70, 20);
+    doc.setFontSize(12);
+    doc.text('Nome: ' + (dados['Nome completo'] || ''), 20, 40);
+    doc.text('CPF: ' + (dados['CPF'] || ''), 20, 50);
+    doc.text('E-mail: ' + (dados['E-mail'] || ''), 20, 60);
+    doc.text('Endereço: ' + (dados['Endereço'] || ''), 20, 70);
+    doc.text('Bairro: ' + (dados['Bairro'] || ''), 20, 80);
+    doc.text('Cidade: ' + (dados['Cidade'] || ''), 20, 90);
+    doc.text('Estado: ' + (dados['Estado'] || ''), 20, 100);
+    doc.text('CEP: ' + (dados['CEP'] || ''), 20, 110);
+    doc.text('Valor: ' + valor, 20, 120);
+    doc.text('Linha digitável: 23790.00000 00000.000000 00000.000000 0 00000000000000', 20, 140);
+    doc.text('Vencimento: ' + new Date(Date.now() + 2*24*60*60*1000).toLocaleDateString('pt-BR'), 20, 150);
+
+    doc.text('Este boleto é apenas para fins de demonstração.', 20, 170);
+
+    doc.save('boleto-falso.pdf');
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Recupera carrinho do localStorage
+  const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+  const subtotal = carrinho.reduce((acc, item) => acc + (item.preco || 0), 0);
+  const qtdItens = carrinho.length;
+
+  // Recupera frete calculado pelo CEP, ou usa padrão
+  let frete = Number(localStorage.getItem("freteCalculado")) || 29.90;
+  let freteTexto = `R$ ${frete.toFixed(2).replace('.', ',')}`;
+  if (subtotal >= 500) {
+    frete = 0;
+    freteTexto = "Grátis";
+  }
+
+  // Atualiza Subtotal e quantidade de itens
+  const subtotalSpan = document.querySelector('.resumo-item .resumo-label');
+  const subtotalValue = document.querySelectorAll('.resumo-value')[0];
+  if (subtotalSpan) subtotalSpan.textContent = `Subtotal (${qtdItens} itens)`;
+  if (subtotalValue) subtotalValue.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+
+  // Atualiza Frete, Descontos e Total
+  const freteValue = document.querySelectorAll('.resumo-value')[1];
+  const descontosValue = document.querySelectorAll('.resumo-value')[2];
+  const totalValue = document.querySelector('.resumo-total .resumo-value');
+
+  let descontos = 0;
+  let total = subtotal + frete;
+
+  if (freteValue) freteValue.textContent = freteTexto;
+  if (descontosValue) descontosValue.textContent = `R$ ${descontos.toFixed(2).replace('.', ',')}`;
+  if (totalValue) totalValue.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+});
+</script>
+
+  <footer id="contato">
+    <p>Contato: contato@biotech.com.br | (11) 1234-5678</p>
+    <p>&copy; 2025 BioTech. Todos os direitos reservados.</p>
+    <div class="redes-sociais">
+      <a href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>

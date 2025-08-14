@@ -1,0 +1,269 @@
+/* Estilização clean para campos de cupom e CEP no carrinho */
+.carrinho-summary > div,
+.carrinho-summary > .summary-row {
+  margin-bottom: 18px;
+}
+
+.carrinho-summary label[for="campo-cupom"],
+.carrinho-summary label[for="campo-cep"] {
+  font-weight: 600;
+  color: #1a4f2b;
+  margin-bottom: 4px;
+  font-size: 1rem;
+  display: block;
+}
+
+.carrinho-summary input[type="text"]#campo-cupom,
+.carrinho-summary input[type="text"]#campo-cep {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 1rem;
+  outline: none;
+  background: #fafafa;
+  width: 120px;
+  transition: border 0.2s;
+}
+
+.carrinho-summary input[type="text"]:focus {
+  border: 1.5px solid #28a745;
+  background: #fff;
+}
+
+.carrinho-summary button#aplicar-cupom,
+.carrinho-summary button#remover-cupom,
+.carrinho-summary button#calcular-frete {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: 6px;
+}
+
+.carrinho-summary button#remover-cupom {
+  background: #e53935;
+}
+
+.carrinho-summary button#remover-cupom:hover {
+  background: #b71c1c;
+}
+
+.carrinho-summary button#aplicar-cupom:hover,
+.carrinho-summary button#calcular-frete:hover {
+  background: #218838;
+}
+
+#cupom-msg, #cep-msg {
+  font-size: 0.97rem;
+  margin-top: 4px;
+  min-height: 18px;
+  display: block;
+}
+
+/* Estilo clean para campo de cupom */
+.campo-cupom {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 22px 14px 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  min-width: 260px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.campo-cupom label {
+  font-weight: 600;
+  color: #1a4f2b;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+.campo-cupom .input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.campo-cupom input[type="text"] {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 1rem;
+  outline: none;
+  background: #fafafa;
+  width: 120px;
+  transition: border 0.2s;
+}
+.campo-cupom input[type="text"]:focus {
+  border: 1.5px solid #28a745;
+  background: #fff;
+}
+.campo-cupom button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.campo-cupom button#remover-cupom {
+  background: #e53935;
+}
+.campo-cupom button#remover-cupom:hover {
+  background: #b71c1c;
+}
+.campo-cupom button:hover {
+  background: #218838;
+}
+#cupom-msg {
+  font-size: 0.97rem;
+  margin-top: 4px;
+  min-height: 18px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .carrinho-summary input[type="text"]#campo-cupom,
+  .carrinho-summary input[type="text"]#campo-cep {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .carrinho-summary .input-group {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+
+
+/* ===== AJUSTES EXTRAS DO DARK MODE ===== */
+
+
+
+body.dark-mode .destaque-card ul li {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid #444;
+}
+
+/* 2. Seção "Impacto que Almejamos" - números */
+body.dark-mode .impacto-numero {
+  color: #ffffff !important;
+}
+
+/* Botão "Conheça nossos produtos" */
+body.dark-mode .btn-verde {
+  background-color: #009688;
+  color: white;
+  border: none;
+}
+
+body.dark-mode .btn-verde:hover {
+  background-color: #00796b;
+  color: #fff;
+}
+/* Remove moldura verde-clara no dark mode */
+body.dark-mode .destaque-metas {
+  background-color: #f3ebeb !important;
+  border-radius: 16px;
+  padding: 20px;
+  border: none !important;
+  background: #1a1a1a !important;
+  box-shadow: none !important;
+}
+body.dark-mode .carrinho-item,
+body.dark-mode .carrinho-summary,
+body.dark-mode .empty-cart,
+body.dark-mode .campo-cupom {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444;
+}
+
+body.dark-mode .carrinho-item-title,
+body.dark-mode .summary-title,
+body.dark-mode .carrinho-title {
+  color:#4ac567 !important;
+}
+
+body.dark-mode .carrinho-item-price,
+body.dark-mode .checkout-btn,
+body.dark-mode .start-shopping-btn {
+  background-color: #4ac567 !important;
+  color: white !important;
+  border: none;
+}
+body.dark-mode .continue-shopping-btn {
+  color: white !important;
+  border: none;
+}
+body.dark-mode .checkout-btn:hover,
+body.dark-mode .start-shopping-btn:hover {
+  background-color: #4ac567 !important;
+}
+
+body.dark-mode .quantity-btn {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555;
+}
+
+body.dark-mode .quantity-input {
+  background-color: #1a1a1a !important;
+  color: #fff !important;
+  border: 1px solid #555;
+}
+
+body.dark-mode .remove-item {
+  color: #ff6b6b !important;
+}
+
+body.dark-mode .summary-label,
+body.dark-mode .summary-value {
+  color: #ccc !important;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="tel"],
+body.dark-mode input[type="email"],
+body.dark-mode textarea {
+  background-color: #222 !important;
+  color: #f0f0f0 !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode #cep-msg,
+body.dark-mode #cupom-msg {
+  color: #80cbc4 !important;
+}
+
+body.dark-mode .etapas-checkout .etapa {
+  color: #aaa;
+}
+
+body.dark-mode .etapas-checkout .etapa.ativa {
+  color: #4ac567;
+}
+
+body.dark-mode .etapas-checkout .etapa::after {
+  background-color: #444;
+}
+
+body.dark-mode .etapas-checkout .etapa.ativa::after {
+  background-color: #4ac567;
+}
+
+
+

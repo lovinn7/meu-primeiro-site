@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Histórico de Compras - BioTech</title>
+    <link rel="stylesheet" href="estilo/estilo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon" />
+    <script src="javascriptt/javascript.js" defer></script>
+    <script src="javascriptt/login.js" defer></script>
+    <script src="javascriptt/carrinho.js" defer></script>
+    <script src="javascriptt/geradordecep.js" defer></script>
+    <style>
+      main {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .titulo-historico {
+        font-size: 26px;
+        color: #0f7d00;
+        text-align: center;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .pedido-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 25px;
+        overflow: hidden;
+        border-left: 5px solid #0f7d00;
+      }
+
+      .pedido-header {
+        background: #f5f5f5;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .pedido-body {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 20px;
+        align-items: center;
+      }
+
+      .produto-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+      }
+
+      .produto-info img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .produto-descricao h4 {
+        margin: 0 0 5px;
+        font-size: 16px;
+      }
+
+      .produto-descricao p {
+        margin: 2px 0;
+        font-size: 14px;
+      }
+
+      .pedido-status {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        color: white;
+        font-weight: bold;
+      }
+
+      .entregue {
+        background-color: #0f7d00;
+      }
+      .entregue {
+        background-color: #0f7d00;
+      }
+
+      .acoes {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn-bio {
+        background: #0f7d00;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .btn-bio:hover {
+        background: #0c5e00;
+      }
+
+      .botao-voltar {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 10px 20px;
+        background-color: #0f7d00;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+      }
+      body.dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      body.dark-mode header,
+      body.dark-mode .pedido-card,
+      body.dark-mode .auth-modal-content {
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+      }
+
+      body.dark-mode .pedido-header {
+        background-color: #2a2a2a;
+      }
+
+      body.dark-mode .btn-bio,
+      body.dark-mode .botao-voltar {
+        background-color: #2e7d32;
+        color: white;
+      }
+
+      body.dark-mode .btn-bio:hover {
+        background-color: #1b5e20;
+      }
+
+      body.dark-mode .accessibility-options,
+      body.dark-mode .auth-modal {
+        background-color: #1e1e1e;
+      }
+
+      body.dark-mode .menu a,
+      body.dark-mode .menu label,
+      body.dark-mode h1,
+      body.dark-mode .titulo-historico {
+        color: #c2ffc2;
+      }
+
+      body.dark-mode footer {
+        background-color: #1e1e1e;
+        color: #ccc;
+      }
+
+      body.dark-mode .pedido-status.entregue {
+        background-color: #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toast-notification" class="toast-notification"></div>
+
+    <!-- Cabeçalho padrão -->
+    <header>
+      <div class="logo-nome">
+        <a href="index.html">
+          <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+        </a>
+        <h1>BioTech</h1>
+      </div>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="sobre.html">Sobre Nós</a></li>
+          <li><a href="metas.html">Metas</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li>
+            <label for="auth-modal-toggle" class="auth-btn"
+              ><i class="fa fa-user"></i> Login ou Cadastro</label
+            >
+          </li>
+        </ul>
+
+        <a href="carrinho.html" class="carrinho-icon">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+            alt="Carrinho"
+            width="30"
+          />
+          <span id="contador-carrinho"></span>
+        </a>
+      </nav>
+      <div
+        id="carrinho"
+        class="carrinho-modal"
+        onclick="this.style.display='none'"
+      >
+        <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+          <div
+            class="carrinho-close"
+            onclick="document.getElementById('carrinho').style.display='none'"
+          >
+            &times;
+          </div>
+          <h2>Seu Carrinho</h2>
+        </div>
+      </div>
+    </header>
+    <input type="checkbox" id="auth-modal-toggle" class="modal-toggle" />
+    <div class="auth-modal">
+      <label for="auth-modal-toggle" class="modal-overlay"></label>
+      <div class="auth-modal-content">
+        <label for="auth-modal-toggle" class="close-modal">&times;</label>
+        <div class="auth-tabs">
+          <input type="radio" id="login-tab" name="auth-tab" checked />
+          <input type="radio" id="register-tab" name="auth-tab" />
+          <div class="tab-labels">
+            <label for="login-tab" class="tab-btn">Login</label>
+            <label for="register-tab" class="tab-btn">Registrar</label>
+          </div>
+          <div class="tab-contents">
+            <div class="tab-content" id="login-content">
+              <form class="auth-form" action-login>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Senha" required />
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    margin: 8px 0 0 0;
+                  "
+                >
+                  <input type="checkbox" id="lembrar-senha" />
+                  Lembrar senha
+                </label>
+                <button type="submit" class="auth-submit-btn">Login</button>
+                <a href="esqueceu-a-senha.html" class="forgot-password"
+                  >Esqueceu a Senha?</a
+                >
+              </form>
+              <div class="social-login">
+                <a
+                  href="https://accounts.google.com/"
+                  class="social-btn google"
+                >
+                  <img
+                    src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg"
+                    alt="Google"
+                    class="google-icon"
+                  />
+                  Entrar com Google
+                </a>
+              </div>
+            </div>
+            <div class="tab-content" id="register-content">
+              <form class="auth-form" action-register>
+                <input
+                  type="text"
+                  placeholder="Nome inteiro"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <input type="date" required />
+                <input
+                  type="text"
+                  placeholder="Nome Materno"
+                  minlength="11"
+                  maxlength="60"
+                  required
+                />
+                <div class="gender-selection">
+                  <p class="gender-label">Sexo:</p>
+                  <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male" class="gender-option">Homem</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female" class="gender-option">Mulher</label>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other" class="gender-option">Outro</label>
+                    <input
+                      type="radio"
+                      id="prefer-not-to-say"
+                      name="gender"
+                      value="prefer-not-to-say"
+                    />
+                    <label for="prefer-not-to-say" class="gender-option"
+                      >Prefiro não dizer</label
+                    >
+                  </div>
+                </div>
+                <input type="email" placeholder="Email" required />
+                <input
+                  type="tel"
+                  placeholder="Telefone/Fixo"
+                  required
+                  minlength="15"
+                  maxlength="15"
+                  pattern="\(\d{2}\) \d{5}-\d{4}"
+                />
+                <input
+                  type="text"
+                  placeholder="CEP"
+                  id="cep"
+                  required
+                  maxlength="9"
+                />
+                <input type="text" placeholder="Rua" id="rua" required />
+                <input type="text" placeholder="Número" id="numero" required />
+                <input type="text" placeholder="Bairro" id="bairro" required />
+                <input type="text" placeholder="Cidade" id="cidade" required />
+                <input type="text" placeholder="Estado" id="estado" required />
+                <input
+                  type="text"
+                  placeholder="CPF"
+                  required
+                  minlength="14"
+                  maxlength="14"
+                  pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  minlength="8"
+                  maxlength="15"
+                />
+                <input type="password" placeholder="Confirmar Senha" required />
+                <button type="submit" class="auth-submit-btn">Registrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aviso-topo">
+      FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA
+      COMPRA
+    </div>
+    <div class="accessibility-float">
+      <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-eye"></i>
+      </button>
+      <div class="accessibility-options">
+        <button id="toggle-theme" title="Alternar contraste">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <div class="font-controls">
+          <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+          <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+          <button class="accessibility-btn" onclick="resetFont()">A</button>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="titulo-historico">
+        <i class="fa fa-box"></i>
+        Histórico de Compras
+      </div>
+
+      <div id="historico-dinamico"></div>
+      <!-- MOVIDO PARA CÁ -->
+
+      <a href="index.html" class="botao-voltar">
+        <i class="fa fa-arrow-left"></i> Voltar para o início
+      </a>
+    </main>
+
+    <button
+      class="botao-orcamento"
+      onclick="document.getElementById('modal-orcamento').style.display = 'flex'"
+    >
+      💬 Orçamento para Eventos Aqui!
+    </button>
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"
+          />
+          <label>Email:</label>
+          <input type="email" required />
+
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required
+          />
+          <label>CEP:</label>
+          <input type="text" id="orcamento-cep" placeholder="" required />
+          <label>Rua:</label>
+          <input type="text" id="orcamento-rua" placeholder="" required />
+          <label>Bairro:</label>
+
+          <input type="text" id="orcamento-bairro" placeholder="" required />
+          <label>Cidade:</label>
+          <input type="text" id="orcamento-cidade" placeholder="" required />
+          <label>Estado:</label>
+          <input type="text" id="orcamento-estado" placeholder="" required />
+          <label>Descrição:</label>
+          <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <footer id="contato">
+      <p>Contato: contato@biotech.com.br | (11) 1234-5678</p>
+      <p>&copy; 2025 BioTech. Todos os direitos reservados.</p>
+      <div class="redes-sociais">
+        <a
+          href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr"
+          target="_blank"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+            alt="Instagram"
+          />
+        </a>
+        <a href="" target="_blank">
+          <img
+            src="https://imagepng.org/wp-content/uploads/2017/08/WhatsApp-icone.png"
+            alt="Instagram"
+          />
+        </a>
+      </div>
+    </footer>
+    <script>
+      const menuConfig = document.getElementById("menu-config");
+      if (menuConfig) {
+        menuConfig.onclick = function (e) {
+          e.stopPropagation();
+          window.location.href = "dados.html";
+        };
+      }
+    </script>
+    <script src="javascriptt/historico.js"></script>
+  </body>
+</html>

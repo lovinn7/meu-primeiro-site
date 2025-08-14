@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Nós - BioTech</title>
+  <link rel="stylesheet" href="estilo/estilo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="imagem/logo2.png" type="image/x-icon">
+  <script src="javascriptt/javascript.js" defer></script>
+  <script src="javascriptt/carrinho.js" defer></script>
+  <script src="javascriptt/geradordecep.js" defer></script>
+ 
+</head>
+<body>
+   <div id="toast-notification" class="toast-notification"></div>
+  <header>
+    <div class="logo-nome">
+      <a href="index.html">
+        <img src="imagem/Logo1.jpeg" alt="Logo Bio3D" class="logo" />
+      </a>
+      <h1>BioTech</h1>
+    </div>
+    <nav>      
+      <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><span class="menu-active">Sobre Nós</span></li>
+        <li><a href="metas.html">Metas</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><label for="auth-modal-toggle" class="auth-btn">Login ou Cadastro</label></li>
+      </ul>
+      <a href="carrinho.html" class="carrinho-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Carrinho" width="30">
+        <span id="contador-carrinho" ></span>
+      </a>
+    </div>
+    <div id="carrinho" class="carrinho-modal" onclick="this.style.display='none'">
+      <div class="carrinho-conteudo" onclick="event.stopPropagation()">
+        <div class="carrinho-close" onclick="document.getElementById('carrinho').style.display='none'">&times;</div>
+        <h2>Seu Carrinho</h2>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- ...cabeçalho e início do body permanecem iguais... -->
+<input type="checkbox" id="auth-modal-toggle" class="modal-toggle">
+<div class="auth-modal">
+  <label for="auth-modal-toggle" class="modal-overlay"></label>
+  <div class="auth-modal-content">
+    <label for="auth-modal-toggle" class="close-modal">&times;</label>
+    <div class="auth-tabs">
+      <input type="radio" id="login-tab" name="auth-tab" checked>
+      <input type="radio" id="register-tab" name="auth-tab">
+      <div class="tab-labels">
+        <label for="login-tab" class="tab-btn">Login</label>
+        <label for="register-tab" class="tab-btn">Registrar</label>
+      </div>
+      <div class="tab-contents">
+        <div class="tab-content" id="login-content">
+          <form class="auth-form" action-login>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Senha" required>
+            <label
+              style="display: flex; align-items: center; gap: 4px; margin: 8px 0 0 0;"
+            >
+              <input type="checkbox" id="lembrar-senha" />
+              Lembrar senha
+            </label>
+            <button type="submit" class="auth-submit-btn">Login</button>
+            <a href="esqueceu-a-senha.html" class="forgot-password">Esqueceu a Senha?</a>
+          </form>
+          <div class="social-login">
+            <a href="https://accounts.google.com/" class="social-btn google">
+              <img src="https://icon-library.com/images/gmail-icon-svg/gmail-icon-svg-28.jpg" alt="Google" class="google-icon">
+              Entrar com Google
+            </a>
+          </div>
+        </div>
+        <div class="tab-content" id="register-content">
+          <form class="auth-form" action-register>
+            <input type="text" placeholder="Nome inteiro" minlength="11" maxlength="60" required>
+            <input type="date" required>
+            <input type="text" placeholder="Nome Materno" minlength="11" maxlength="60" required>
+            <div class="gender-selection">
+              <p class="gender-label">Sexo:</p>
+              <div class="gender-options">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male" class="gender-option">Homem</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" class="gender-option">Mulher</label>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other" class="gender-option">Outro</label>
+                <input type="radio" id="prefer-not-to-say" name="gender" value="prefer-not-to-say">
+                <label for="prefer-not-to-say" class="gender-option">Prefiro não dizer</label>
+              </div>
+            </div>
+            <input type="email" placeholder="Email" required>
+            <input
+              type="tel"
+              placeholder="Telefone/Fixo"
+              required
+              minlength="15"
+              maxlength="15"
+              pattern="\(\d{2}\) \d{5}-\d{4}"
+            >
+            <input
+              type="text"
+              placeholder="CEP"
+              id="cep"
+              required
+              maxlength="9"
+            >
+            <input type="text" placeholder="Rua" id="rua" required>
+            <input type="text" placeholder="Número" id="numero" required>
+            <input type="text" placeholder="Bairro" id="bairro" required>
+            <input type="text" placeholder="Cidade" id="cidade" required>
+            <input type="text" placeholder="Estado" id="estado" required>
+            <input
+              type="text"
+              placeholder="CPF"
+              required
+              minlength="14"
+              maxlength="14"
+              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+            >
+            <input type="password" placeholder="Senha" inlength="8" maxlength="15"required>
+            <input type="password" placeholder="Confirmar Senha"  required>
+            <button type="submit" class="auth-submit-btn">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ...restante do HTML e o <script> permanecem iguais... -->
+<div class="aviso-topo">
+  FRETE GRÁTIS NAS COMPRAS ACIMA DE R$ 500,00. GANHE UMA SEMENTE EM CADA COMPRA
+  </div>
+  <div class="accessibility-float">
+  <button class="accessibility-main-btn" title="Acessibilidade">
+        <i class="fa-solid fa-solid fa-eye"></i>
+      </button>
+  <div class="accessibility-options">
+    <button id="toggle-theme" title="Alternar contraste">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <div class="font-controls">
+      <button class="accessibility-btn" onclick="increaseFont()">A+</button>
+      <button class="accessibility-btn" onclick="decreaseFont()">A-</button>
+      <button class="accessibility-btn" onclick="resetFont()">A</button>
+    </div>
+  </div>
+  </div>
+
+  <main>
+    <div class="slider-container">
+      <input type="radio" name="slider" id="slide1" checked>
+      <input type="radio" name="slider" id="slide2">
+      <input type="radio" name="slider" id="slide3">
+      <input type="radio" name="slider" id="slide4">
+
+      <div class="slider">
+        <div class="slide">
+          <img src="imagem/vista-aerea-da-floresta-amazonica-833392.jpg" alt="Doação para o meio ambiente">
+          <div class="slide-caption">
+            <h3>Salve o Planeta: Sua Doação Faz a Diferença!</h3>
+            <p>Doe para a SOS Mata Atlântica.</p>
+            <a href="https://www.sosma.org.br/" target="_blank" class="btn-doacao">Doar Agora →</a>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1467320424268-f91a16cf7c77" alt="Impressora 3D">
+          <div class="slide-caption">
+            <h3>Descubra Como um Produto é Criado na Impressora 3D!</h3>
+            <p>Do design ao produto final em minutos.</p>
+            <a href="https://www.youtube.com/watch?v=3eBzM4m2050" target="_blank" class="btn-video">▶ Assistir Vídeo</a>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="https://images.pexels.com/photos/7551395/pexels-photo-7551395.jpeg" alt="Família reciclando">
+          <div class="slide-caption">
+            <h3>Manual: Como Ser Ecológico em Casa e no Trabalho</h3>
+            <p>Dicas simples para reduzir seu impacto ambiental.</p>
+            <a href="imagem/Manual - Sustentabilidade.pdf" target="_blank" class="btn-manual">📖 Baixar Manual</a>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="imagem/GTI.png" alt="Horta urbana">
+          <div class="slide-caption">
+            <h3>Descarte Inteligente Começa Aqui! ♻️</h3>
+            <p>O GTI (Get Trash Intelligence) é uma plataforma inovadora que conecta indivíduos que precisam descartar resíduos de maneira adequada com profissionais especializados em coleta seletiva.</p>
+            <a href="https://gettrashintelligence.netlify.app/" target="_blank" class="btn-horta">Acesse o Site →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-dots">
+        <a href="#slide1" class="dot"></a>
+        <a href="#slide2" class="dot"></a>
+        <a href="#slide3" class="dot"></a>
+        <a href="#slide4" class="dot"></a>
+      </div>
+    </div>
+      <button class="botao-voltar" onclick="history.back()">
+        <i class="fa fa-arrow-left"></i>
+      </button> 
+
+     <p class="sobre-subtitulo">Tecnologia e sustentabilidade andam juntas</p>
+      <section class="sobre-grid">
+        <div class="card">
+          <img src="https://img.icons8.com/emoji/96/seedling.png" alt="Ícone sustentabilidade">
+          <h2>Quem Somos</h2>
+          <p>A BioTech nasceu com a missão de unir inovação tecnológica e responsabilidade ambiental. Nossa jornada começou com o sonho de transformar resíduos em soluções criativas, usando impressoras 3D para produzir itens biodegradáveis e úteis para o dia a dia das empresas.</p> <p>Além disso, também desenvolvemos produtos a partir de materiais recicláveis, reforçando nosso compromisso com a economia circular e a redução do impacto ambiental.</p> <p>Acreditamos que pequenas ações geram grandes mudanças, e por isso, nosso foco está em criar produtos que encantam, informam e promovem uma cultura mais sustentável.</p>
+        </div>
+        <div class="card">
+          <img src="https://static.vecteezy.com/system/resources/previews/014/281/499/original/food-eco-bag-icon-cartoon-style-vector.jpg" alt="Ícone de produto">
+          <h2>Nossos Produtos</h2>
+          <p>Criamos ecobags, copos biodegradáveis, brindes personalizados e utilitários sustentáveis, todos feitos com materiais renováveis e técnicas de impressão 3D.</p>
+          <p>Nossos produtos são ideais para eventos, ações de marketing, brindes corporativos ou uso no dia a dia com propósito ecológico.</p>
+        </div>
+        <div class="card">
+          <img src="https://i1.wp.com/www.iparh.com/wp-content/uploads/2017/12/missao-valores-visao.png?ssl=1" alt="Ícone inovação">
+          <h2>Missão</h2>
+          <p>Oferecer soluções sustentáveis com design inteligente que contribuam para um mundo mais verde e consciente.</p>
+          <h2>Visão</h2>
+          <p>Ser referência nacional em produtos ecológicos personalizados até 2030.</p>
+          <h2>Valores</h2>
+          <ul>
+            <li>Inovação ecológica</li>
+            <li>Ética e transparência</li>
+            <li>Responsabilidade socioambiental</li>
+            <li>Criatividade com propósito</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="conteudo">
+        <h2>Depoimentos</h2>
+        <div class="depoimentos">
+          <div class="depoimento">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Maria da Silva">
+            <h4>Maria da Silva</h4>
+            <p>"As ecobags são maravilhosas! Levo até pro mercado e todo mundo elogia. Já indiquei pra família inteira!"</p>
+          </div>
+          <div class="depoimento">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="João Oliveira">
+            <h4>João Oliveira</h4>
+            <p>"Comprei os copos personalizados pro aniversário da minha filha e ficou um charme! Super recomendo."</p>
+          </div>
+          <div class="depoimento">
+            <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Claudia Ramos">
+            <h4>Claudia Ramos</h4>
+            <p>"Produto bonito, durável e ainda por cima ajuda o planeta? Já virou minha marca favorita!"</p>
+          </div>
+        </div>
+      </div>
+    </main>
+<button
+    class="botao-orcamento"
+   onclick="document.getElementById('modal-orcamento').style.display = 'flex'"
+   >
+  💬 Orçamento para Eventos Aqui!
+  </button>
+    <div id="modal-orcamento" class="modal-orcamento">
+      <div class="modal-conteudo">
+        <span
+          class="modal-fechar"
+          onclick="document.getElementById('modal-orcamento').style.display='none'"
+          >&times;</span
+        >
+        <img src="imagem/Logo1.jpeg" alt="logotipo" class="modal-logo" />
+        <h2>Solicite um Orçamento</h2>
+        <form>
+          <label>Nome:</label>
+          <input type="text" required />
+          <label>CPF/CNPJ:</label>
+          <input
+            type="text"
+            required
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+            minlength="11"
+            maxlength="11"
+          />
+          
+          <label>Email:</label>
+          <input type="email" required />
+          <label>Telefone:</label>
+          <input
+            type="tel"
+            placeholder="(21)99999-9999"
+            pattern="[0-9]*"
+            required
+          />
+         
+           <label>CEP:</label>
+<input type="text" id="orcamento-cep" placeholder="" required>
+<label>Rua:</label>
+<input type="text" id="orcamento-rua" placeholder="" required>
+<label>Bairro:</label>
+
+<input type="text" id="orcamento-bairro" placeholder="" required>
+<label>Cidade:</label>
+<input type="text" id="orcamento-cidade" placeholder="" required>
+<label>Estado:</label>
+<input type="text" id="orcamento-estado" placeholder="" required>
+  <label>Descrição:</label>
+  <textarea> </textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Toast no topo do modal
+        function showToast(msg) {
+          const toast = document.getElementById("toast-notification");
+          if (!toast) return;
+          toast.textContent = msg;
+          toast.classList.add("show");
+          toast.classList.remove("hide");
+          setTimeout(() => {
+            toast.classList.add("hide");
+            setTimeout(() => {
+              toast.classList.remove("show");
+              toast.style.display = "none";
+            }, 400);
+          }, 2200);
+          toast.style.display = "block";
+        }
+
+        // Avatar menu
+        function mostrarUsuario(nome) {
+          let navMenu = document.querySelector("nav .menu");
+          let loginLi = navMenu.querySelector("li .auth-btn")?.parentElement;
+          if (loginLi) loginLi.style.display = "none";
+          let avatarLi = document.getElementById("user-avatar");
+          if (!avatarLi) {
+            avatarLi = document.createElement("li");
+            avatarLi.id = "user-avatar";
+            avatarLi.style.position = "relative";
+            avatarLi.style.display = "flex";
+            avatarLi.style.alignItems = "center";
+            avatarLi.style.gap = "8px";
+            avatarLi.style.cursor = "pointer";
+            avatarLi.innerHTML = `
+        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(
+          nome
+        )}&background=009688&color=fff&rounded=true&size=32" alt="Avatar" style="border-radius:50%;width:32px;height:32px;">
+        <span style="font-weight:bold;">${nome.split(" ")[0]}</span>
+        <div id="avatar-menu" style="display:none;position:absolute;top:40px;right:0;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);min-width:180px;z-index:999;">
+          <ul style="list-style:none;padding:8px 0;margin:0;">
+            <li style="padding:8px 20px;cursor:pointer;" id="menu-historico">Histórico de Compras</li>
+            <li style="padding:8px 20px;cursor:pointer;" id="menu-config">Configurações do Usuário</li>
+            <li style="padding:8px 20px;cursor:pointer;color:#e53935;" id="menu-logout">Sair</li>
+          </ul>
+        </div>
+      `;
+            navMenu.appendChild(avatarLi);
+
+            avatarLi.addEventListener("click", function (e) {
+              e.stopPropagation();
+              let menu = document.getElementById("avatar-menu");
+              menu.style.display =
+                menu.style.display === "block" ? "none" : "block";
+            });
+            document.addEventListener("click", function () {
+              let menu = document.getElementById("avatar-menu");
+              if (menu) menu.style.display = "none";
+            });
+                       document.getElementById("menu-logout").onclick = function (e) {
+  e.stopPropagation();
+  localStorage.setItem("userLogado", "false");
+  localStorage.removeItem("carrinho"); // <- zera o carrinho ao sair
+  atualizarContadorCarrinho();        // <- atualiza o ícone do carrinho
+  avatarLi.remove();
+  if (loginLi) loginLi.style.display = "";
+  showToast("Você saiu da conta.");
+};
+            const menuHistorico = document.getElementById("menu-historico");
+            if (menuHistorico) {
+              menuHistorico.onclick = function (e) {
+                e.stopPropagation();
+                window.location.href = "historico.html";
+              };
+            }
+            const menuConfig = document.getElementById("menu-config");
+            if (menuConfig) {
+              menuConfig.onclick = function (e) {
+                e.stopPropagation();
+                window.location.href = "dados.html";
+              };
+            }
+          } else {
+            avatarLi.querySelector("span").textContent = nome.split(" ")[0];
+            avatarLi.querySelector(
+              "img"
+            ).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+              nome
+            )}&background=009688&color=fff&rounded=true&size=32`;
+          }
+        }
+
+        // Limpa todos os campos de um form
+        function limparCampos(form) {
+          if (!form) return;
+          form.querySelectorAll("input").forEach((input) => {
+            if (input.type === "checkbox" || input.type === "radio") {
+              input.checked = false;
+            } else {
+              input.value = "";
+            }
+          });
+        }
+
+        // Preenche campos de login se lembrar senha estiver ativo
+        function preencherLoginSeLembrado() {
+          const loginForm = document.querySelector(".auth-form[action-login]");
+          if (!loginForm) return;
+          const lembrar = localStorage.getItem("lembrarSenha") === "true";
+          const email = localStorage.getItem("userEmail") || "";
+          const senha = localStorage.getItem("userSenha") || "";
+          loginForm.querySelector('input[type="email"]').value = lembrar
+            ? email
+            : "";
+          loginForm.querySelector('input[type="password"]').value = lembrar
+            ? senha
+            : "";
+          const checkbox = document.getElementById("lembrar-senha");
+          if (checkbox) checkbox.checked = lembrar;
+        }
+
+        // Troca de abas: limpa campos do cadastro e login
+        function setupTabLimpeza() {
+          const loginTab = document.getElementById("login-tab");
+          const registerTab = document.getElementById("register-tab");
+          const loginForm = document.querySelector(".auth-form[action-login]");
+          const registerForm = document.querySelector(
+            ".auth-form[action-register]"
+          );
+
+          if (loginTab && registerTab && loginForm && registerForm) {
+            loginTab.addEventListener("change", function () {
+              limparCampos(registerForm);
+              preencherLoginSeLembrado();
+            });
+            registerTab.addEventListener("change", function () {
+              limparCampos(registerForm);
+              limparCampos(loginForm);
+            });
+          }
+        }
+
+        // CPF
+        const cpfInput = document.querySelector('input[placeholder="CPF"]');
+        if (cpfInput) {
+          cpfInput.addEventListener("input", function () {
+            let v = cpfInput.value.replace(/\D/g, "");
+            v = v.replace(/(\d{3})(\d)/, "$1.$2");
+            v = v.replace(/(\d{3})(\d)/, "$1.$2");
+            v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            cpfInput.value = v;
+          });
+        }
+
+        // Telefone
+        const telInput = document.querySelector(
+          'input[placeholder="Telefone/Fixo"]'
+        );
+        if (telInput) {
+          telInput.addEventListener("input", function () {
+            let v = telInput.value.replace(/\D/g, "");
+            v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+            v = v.replace(/(\d{5})(\d)/, "$1-$2");
+            telInput.value = v;
+          });
+        }
+
+        // Função para verificar login
+        function isUserLoggedIn() {
+          return (
+            localStorage.getItem("userNome") &&
+            localStorage.getItem("userEmail") &&
+            localStorage.getItem("userSenha")
+          );
+        }
+
+        // Lógica do botão COMPRAR
+        document.querySelectorAll(".btn-comprar").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (isUserLoggedIn()) {
+              showToast("Produto adicionado ao carrinho!");
+              // Aqui você pode adicionar lógica real de adicionar ao carrinho, se quiser
+            } else {
+              document.getElementById("auth-modal-toggle").checked = true;
+              showToast("Faça login para comprar!");
+            }
+          });
+        });
+
+        // REGISTRO
+        const registerForm = document.querySelector(
+          ".auth-form[action-register]"
+        );
+        if (registerForm) {
+          registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nome = registerForm
+              .querySelector('input[placeholder="Nome inteiro"]')
+              .value.trim();
+            const nomeMaterno = registerForm
+              .querySelector('input[placeholder="Nome Materno"]')
+              .value.trim();
+            const email = registerForm
+              .querySelector('input[type="email"]')
+              .value.trim();
+            const telefone = registerForm
+              .querySelector('input[placeholder="Telefone/Fixo"]')
+              .value.trim();
+            const cpf = registerForm
+              .querySelector('input[placeholder="CPF"]')
+              .value.trim();
+            const senha = registerForm.querySelector(
+              'input[placeholder="Senha"]'
+            ).value;
+            const senha2 = registerForm.querySelector(
+              'input[placeholder="Confirmar Senha"]'
+            ).value;
+            // Endereço
+            const cep = registerForm.querySelector("#cep").value.trim();
+            const rua = registerForm.querySelector("#rua").value.trim();
+            const numero = registerForm.querySelector("#numero").value.trim();
+            const bairro = registerForm.querySelector("#bairro").value.trim();
+            const cidade = registerForm.querySelector("#cidade").value.trim();
+            const estado = registerForm.querySelector("#estado").value.trim();
+
+            if (
+              !nome ||
+              !nomeMaterno ||
+              !email ||
+              !telefone ||
+              !cpf ||
+              !senha ||
+              !senha2 ||
+              !cep ||
+              !rua ||
+              !numero ||
+              !bairro ||
+              !cidade ||
+              !estado
+            ) {
+              showToast("Preencha todos os campos obrigatórios.");
+              return;
+            }
+            if (senha !== senha2) {
+              showToast("As senhas não coincidem.");
+              return;
+            }
+            localStorage.setItem("userNome", nome);
+            localStorage.setItem("userNomeMaterno", nomeMaterno);
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userTelefone", telefone);
+            localStorage.setItem("userCPF", cpf);
+            localStorage.setItem("userSenha", senha);
+            localStorage.setItem(
+              "userEndereco",
+              JSON.stringify({ cep, rua, numero, bairro, cidade, estado })
+            );
+            document.getElementById("auth-modal-toggle").checked = true;
+            document.getElementById("login-tab").checked = true;
+            limparCampos(registerForm);
+            showToast("Cadastro realizado com sucesso!");
+          });
+        }
+
+        // Salvar lembrar senha ao marcar/desmarcar o checkbox
+        const lembrarSenhaCheckbox = document.getElementById("lembrar-senha");
+        if (lembrarSenhaCheckbox) {
+          lembrarSenhaCheckbox.addEventListener("change", function () {
+            localStorage.setItem(
+              "lembrarSenha",
+              this.checked ? "true" : "false"
+            );
+          });
+        }
+
+        // LOGIN
+        const loginForm = document.querySelector(".auth-form[action-login]");
+        if (loginForm) {
+          loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = loginForm.querySelector('input[type="email"]').value;
+            const senha = loginForm.querySelector(
+              'input[type="password"]'
+            ).value;
+            const savedEmail = localStorage.getItem("userEmail");
+            const savedSenha = localStorage.getItem("userSenha");
+            const savedNome = localStorage.getItem("userNome");
+            const lembrar = document.getElementById("lembrar-senha").checked;
+
+            // Salva email/senha se lembrar senha estiver marcado
+            if (lembrar) {
+              localStorage.setItem("lembrarSenha", "true");
+              localStorage.setItem("userEmail", email);
+              localStorage.setItem("userSenha", senha);
+            } else {
+              localStorage.setItem("lembrarSenha", "false");
+            }
+
+            if (email === savedEmail && senha === savedSenha && savedNome) {
+              localStorage.setItem("userLogado", "true");
+              mostrarUsuario(savedNome);
+              document.getElementById("auth-modal-toggle").checked = false;
+              limparCampos(loginForm);
+              showToast("Login realizado com sucesso!");
+            } else {
+              showToast("Usuário ou senha inválidos. Cadastre-se primeiro.");
+            }
+          });
+        }
+
+        // Limpa campos ao abrir modal e preenche login se lembrar senha
+        document
+          .getElementById("auth-modal-toggle")
+          ?.addEventListener("change", function (e) {
+            if (this.checked) {
+              limparCampos(
+                document.querySelector(".auth-form[action-register]")
+              );
+              limparCampos(document.querySelector(".auth-form[action-login]"));
+              preencherLoginSeLembrado();
+            }
+          });
+
+        // Troca de abas limpa campos
+        setupTabLimpeza();
+
+        // Exibir avatar se usuário já estiver logado
+        const savedNome = localStorage.getItem("userNome");
+        const savedEmail = localStorage.getItem("userEmail");
+        const savedSenha = localStorage.getItem("userSenha");
+        const userLogado = localStorage.getItem("userLogado") === "true";
+        if (savedNome && savedEmail && savedSenha && userLogado) {
+          mostrarUsuario(savedNome);
+        }
+
+        // Preenchimento automático de endereço pelo CEP
+        const cepInput = document.getElementById("cep");
+        if (cepInput) {
+          cepInput.addEventListener("blur", function () {
+            const cep = cepInput.value.replace(/\D/g, "");
+            if (cep.length === 8) {
+              fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then((res) => res.json())
+                .then((data) => {
+                  if (!data.erro) {
+                    document.getElementById("rua").value =
+                      data.logradouro || "";
+                    document.getElementById("bairro").value = data.bairro || "";
+                    document.getElementById("cidade").value =
+                      data.localidade || "";
+                    document.getElementById("estado").value = data.uf || "";
+                  }
+                });
+            }
+          });
+        }
+      });
+  </script>
+
+
+  <footer id="contato">
+    <p>Contato: contato@biotech.com.br | (11) 1234-5678</p>
+    <p>&copy; 2025 BioTech. Todos os direitos reservados.</p>
+    <div class="redes-sociais">
+      <a href="https://www.instagram.com/biot3ch_?igsh=MW5rZGlieDg5ZWRjbw%3D%3D&utm_source=qr" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+        <a href="" target="_blank">
+        <img src="https://imagepng.org/wp-content/uploads/2017/08/WhatsApp-icone.png" alt="Instagram">
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
