@@ -1,0 +1,253 @@
+* {
+    box-sizing: border-box;
+   font-family: 'poppins', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+
+ul {
+    display: flex; 
+    justify-content:space-around;
+    list-style-type: none;
+    align-items:center;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(2, 124, 28, 0);
+
+}
+
+ul>img {
+    width: 90px;
+    height: 90px;
+    justify-content: end;
+}
+
+a {
+    color: rgb(2, 73, 2);
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+h3 {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(12, 12, 12);
+    text-align: center;
+    font-size: 70px;
+
+}
+
+
+
+h4 {
+    
+    padding: 25%;
+    width: 900px;
+    text-align: center;
+    font-size: 70px;
+    color: rgb(1, 73, 13);
+    font-family:Arial, Helvetica, sans-serif;
+    border-radius: 15px;
+
+}
+
+
+.texto {
+
+    display: inline;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+
+
+.catalogo {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 0;
+}
+
+.catalogo h1 {
+
+    color: black;
+    text-align: center;
+
+
+}
+
+.center1 {
+    text-align: center;
+}
+
+.center1>h1 {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(1, 107, 19);
+    text-align: center;
+    font-size: 150px;
+    background-color: rgba(0, 128, 0, 0);
+    
+}
+
+
+.btn1 {
+
+    font-size: 17px;
+    padding: 10px 50px;
+    border: none;
+    background-color: #000000c4;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: 0.5s background;
+    cursor: pointer;
+}
+
+.btn1:hover {
+    transition: 0.5s background;
+    background-color: #3f3f3f;
+}
+
+
+.card {
+    margin: 90px;
+    background-color: rgb(187, 187, 187);
+    color: #000000;
+    text-align: center;
+    width: 400px;
+    height: 850px;
+    border-radius: 10px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+}
+
+.card>img {
+    width: 100%;
+    height: 450px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+
+}
+
+
+.card1 a {
+    color: #fff;
+   
+}
+.card2 a {
+    color: #fff;
+   
+}
+
+.card3 a {
+    color: #fff;
+   
+}
+.card4 a {
+    color: #fff;
+   
+}
+.card5 a {
+    color: #fff;
+   
+}
+.card6 a {
+    color: #fff;
+   
+}
+.card7 a {
+    color: #fff;
+   
+}
+
+.card8 a {
+    color: #fff;
+   
+}
+.card9 a {
+    color: #fff;
+   
+}
+
+
+.card>h1 {
+     font-size: 30px;
+     padding-top: 10px;
+}
+
+.card>p {
+    font-size: 14px;
+    padding: 1px 10px;
+}
+
+.main2 {
+    display: flex;
+    justify-content: center;
+}
+
+.lgn {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("imagens/nova.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    width: 420px;
+    background-color: rgba(3, 3, 3, 0.479);
+    border: 2px solid;
+    border-radius: 10px;
+    color: #7c7400;
+    padding: 30px 40px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+    
+}
+.container h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.lgn a {
+    color: #fff;
+}
+
+.input-box {
+    position:relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px o;
+
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+    
+
+}
